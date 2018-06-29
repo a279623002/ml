@@ -309,23 +309,23 @@
   <!-- <script src="/css/ztswt/pffooter.js"></script> -->
   <script>
     //自动轮播
-    $(function () {
-      var size2 = 0;
-      var nextInter;
+    // $(function () {
+    //   var size2 = 0;
+    //   var nextInter;
 
-      var next2 = $('.slider2 .next');
+    //   var next2 = $('.slider2 .next');
 
 
-      nextInter2 = setInterval(function () {
-        if (size2 < 4) {
-          next2.click();
-          size2++;
-        } else {
-          $('.slider2 .cont ul').animate({ 'left': 0 });
-          size2 = 0;
-        }
-      }, 5000);
-    });
+    //   nextInter2 = setInterval(function () {
+    //     if (size2 < 4) {
+    //       next2.click();
+    //       size2++;
+    //     } else {
+    //       $('.slider2 .cont ul').animate({ 'left': 0 });
+    //       size2 = 0;
+    //     }
+    //   }, 5000);
+    // });
   </script>
   <script>
     //选项卡
@@ -353,6 +353,7 @@
       var height8 = (874 / 1920) * width + 'px';
       var height9 = (779 / 1920) * width + 'px';
       var tab_li_height = $('.tab li').width() + 'px';
+      var img = (417 / 293) * $('.row img').width() + 'px';
       $('.top').css({ 'height': height });
       $('.box1').css({ 'height': height1 });
       $('.box2').css({ 'height': height2 });
@@ -364,6 +365,7 @@
       $('.box8').css({ 'height': height8 });
       $('.box9').css({ 'height': height9 });
       $('.tab li').css({ 'height': tab_li_height });
+      $('.row img').css({ 'height': img });
     })
 
     //7选1设置
@@ -378,21 +380,6 @@
         $(".itemB").find('input[type=checkbox]').not(this).attr("checked", false);
       });
 
-    })
-    //自动轮播
-    $(function () {
-      var size2 = 0;
-      var nextInter;
-      var next2 = $('.slider2 .next');
-      nextInter2 = setInterval(function () {
-        if (size2 < 4) {
-          next2.click();
-          size2++;
-        } else {
-          $('.slider2 .cont ul').animate({ 'left': 0 }, 500);
-          size2 = 0;
-        }
-      }, 5000);
     })
 
     //开头动画
