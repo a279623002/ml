@@ -60,6 +60,7 @@
       <img src="./images/box1_img1.png" alt="">
       <img src="./images/box1_img2.png" alt="">
       <img src="./images/box1_img3.png" alt="">
+      <p>参加此钜惠均送医美洗脸1次</p>
     </div>
     <div class="box2">
       <img src="./images/box2_img1.png" alt="">
@@ -129,54 +130,54 @@
     <div class="box4">
       <img style="width: 60%;display: block;margin: 0 auto;padding-top:3%;" src="./images/box4_img1.png" alt="">
       <div class="row">
-        <img src="./images/box4_img2.png" alt="">
-        <img src="./images/box4_img3.png" alt="">
-        <img src="./images/box4_img4.png" alt="">
-        <img src="./images/box4_img5.png" alt="">
+        <img src="./images/box4_img2.jpg" alt="">
+        <img src="./images/box4_img3.jpg" alt="">
+        <img src="./images/box4_img4.jpg" alt="">
+        <img src="./images/box4_img5.jpg" alt="">
       </div>
       <div class="row">
-        <img src="./images/box4_img6.png" alt="">
-        <img src="./images/box4_img7.png" alt="">
-        <img src="./images/box4_img8.png" alt="">
-        <img src="./images/box4_img9.png" alt="">
+        <img src="./images/box4_img6.jpg" alt="">
+        <img src="./images/box4_img7.jpg" alt="">
+        <img src="./images/box4_img8.jpg" alt="">
+        <img src="./images/box4_img9.jpg" alt="">
       </div>
       <p>温馨提示：瘦脸针/玻尿酸正品保障，保障每一针都足量注射；无创玻尿酸，蛋白线线雕当月均有全年特低优惠。</p>
     </div>
     <div class="box5">
       <img style="width: 60%;display: block;margin: 0 auto;padding-top:4%;" src="./images/box5_img1.png" alt="">
       <div class="row">
-        <img src="./images/box5_img2.png" alt="">
-        <img src="./images/box5_img3.png" alt="">
-        <img src="./images/box5_img4.png" alt="">
-        <img src="./images/box5_img5.png" alt="">
+        <img src="./images/box5_img2.jpg" alt="">
+        <img src="./images/box5_img3.jpg" alt="">
+        <img src="./images/box5_img4.jpg" alt="">
+        <img src="./images/box5_img5.jpg" alt="">
       </div>
       <div class="row">
-        <img src="./images/box5_img6.png" alt="">
-        <img src="./images/box5_img7.png" alt="">
-        <img src="./images/box5_img8.png" alt="">
-        <img src="./images/box5_img9.png" alt="">
+        <img src="./images/box5_img6.jpg" alt="">
+        <img src="./images/box5_img7.jpg" alt="">
+        <img src="./images/box5_img8.jpg" alt="">
+        <img src="./images/box5_img9.jpg" alt="">
       </div>
     </div>
     <div class="box6">
       <img style="width: 60%;display: block;margin: 0 auto;padding-top:4%;" src="./images/box6_img1.png" alt="">
       <div class="row">
-        <img src="./images/box6_img2.png" alt="">
-        <img src="./images/box6_img3.png" alt="">
-        <img src="./images/box6_img4.png" alt="">
-        <img src="./images/box6_img5.png" alt="">
+        <img src="./images/box6_img2.jpg" alt="">
+        <img src="./images/box6_img3.jpg" alt="">
+        <img src="./images/box6_img4.jpg" alt="">
+        <img src="./images/box6_img5.jpg" alt="">
       </div>
       <div class="row">
-        <img src="./images/box6_img6.png" alt="">
-        <img src="./images/box6_img7.png" alt="">
-        <img src="./images/box6_img8.png" alt="">
-        <img src="./images/box6_img9.png" alt="">
+        <img src="./images/box6_img6.jpg" alt="">
+        <img src="./images/box6_img7.jpg" alt="">
+        <img src="./images/box6_img8.jpg" alt="">
+        <img src="./images/box6_img9.jpg" alt="">
       </div>
     </div>
     <div class="box7">
       <img style="width: 60%;display: block;margin: 0 auto;padding-top: 1%;" src="./images/box7_img1.png" alt="">
       <div class="row">
-        <img src="./images/box7_img2.png" alt="">
-        <img src="./images/box7_img3.png" alt="">
+        <img src="./images/box7_img2.jpg" alt="">
+        <img src="./images/box7_img3.jpg" alt="">
       </div>
     </div>
     <div class="box8">
@@ -343,8 +344,18 @@
       $('.animate1').delay(500).animate({ 'left': '22%' }, 1000);
     }
     $(function () {
+      var flag = 1;
       animate();
       setInterval(animate, 3000);
+      setInterval(function () {
+        if (flag) {
+          flag = 0;
+          $('.box1 p').css({ 'font-size': '1.4vw','left':'41%' });
+        } else {
+          flag = 1;
+          $('.box1 p').css({ 'font-size': '1.3vw','left':'41.5%' });
+        }
+      },500)
     })
 
 

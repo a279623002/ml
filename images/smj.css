@@ -18,6 +18,7 @@
     width: 100%;
     background: url(../images/box1_bg.jpg) no-repeat center center;
     background-size: cover;
+    position: relative;
 }
 
 .box1 img {
@@ -28,6 +29,16 @@
 
 .box1 img:first-child {
     padding-top: 4%;
+}
+
+.box1 p {
+    color: #FFF;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3vw;
+    position: absolute;
+    top: 60%;
+    left: 41.5%;
 }
 
 .box2 {
@@ -330,7 +341,6 @@
 .slider2 .case .cont ul li dl {
     padding: none;
 }
-
 
 .slider2 ul {
     width: 500% !important;
