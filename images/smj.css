@@ -270,53 +270,11 @@
     cursor: pointer;
 }
 
-.tab li:first-child {
-    background: url(./tab_bg_01.png) no-repeat center center;
-    background-size: cover;
-}
-
-.tab li:nth-child(2) {
-    background: url(./tab_bg_02.png) no-repeat center center;
-    background-size: cover;
-}
-
-.tab li:nth-child(3) {
-    background: url(./tab_bg_03.png) no-repeat center center;
-    background-size: cover;
-}
-
-.tab li:last-child {
-    background: url(./tab_bg_04.png) no-repeat center center;
-    background-size: cover;
-}
 
 .on {
     display: block;
 }
 
-.tab li:first-child.cur {
-    background: url(./tab_active_01.png) no-repeat center center;
-    background-size: cover;
-    color: #FFF;
-}
-
-.tab li:nth-child(2).cur {
-    background: url(./tab_active_02.png) no-repeat center center;
-    background-size: cover;
-    color: #FFF;
-}
-
-.tab li:nth-child(3).cur {
-    background: url(./tab_active_03.png) no-repeat center center;
-    background-size: cover;
-    color: #FFF;
-}
-
-.tab li:last-child.cur {
-    background: url(./tab_active_04.png) no-repeat center center;
-    background-size: cover;
-    color: #FFF;
-}
 
 /* 轮播样式 */
 
