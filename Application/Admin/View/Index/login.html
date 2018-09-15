@@ -1,0 +1,86 @@
+<include file="Public/header" />
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <h2>名流后台管理系统</h2>
+        <div>
+            <form class="m-t" action="" method="post" id="loginForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="account" placeholder="用户名">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="密码">
+                </div>
+                <div class="">
+                 <input id="j_verify" name="code" type="text" class="form-control x164 in" placeholder="验证码">
+                 <img id="verify_img" alt="点击更换" title="点击更换" src="{:U('Index/verify',array())}" style="margin-top: 15px;margin-bottom: 15px;">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+            </form>
+        </div>
+    </div>
+<include file="Public/footer" />
+<script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+<script src="__PUBLIC__/Admin/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="__PUBLIC__/Admin/js/plugins/layer/laydate/laydate.js"></script>
+<script src="__PUBLIC__/Admin/js/plugins/validate/jquery.validate.js"></script>
+<script src="__PUBLIC__/Admin/js/plugins/validate/additional-methods.js"></script>
+<script>
+$("#verify_img").click(function() {
+   var verifyURL = "{:U('index/verify',array())}";
+   var time = new Date().getTime();
+   $("#verify_img").attr({
+      "src" : verifyURL
+   });
+});
+</script>
+   <script type="text/javascript">
+    $().ready(function() {
+    	  $("#loginForm").validate({
+    	    rules: {
+    	      account: {
+    	    	  required : true,
+    	    	  minlength : 5,
+    	      },
+    	      password: {
+    	    	  required : true,
+    	    	  minlength : 6,
+    	      },
+    	      code: {
+    	    	  required : true,
+    	    	  minlength : 4,
+    	      },
+    	    },
+    	    messages: {
+    	      account: {
+       	        required : "请填写账号",
+       	        minlength: "账号长度大于5位",
+       	      },
+       	      password: {
+      	        required : "请填写密码",
+      	        minlength: "密码长度大于6位",
+      	      },
+      	      code: {
+    	        required : "请填写验证码",
+    	        minlength: "验证码长度大于4位",
+    	      },
+    	     },
+    	     submitHandler:function(form){
+	  				$.ajax({
+	  					url: '{:U('Index/login')}',
+	  					type: 'post',
+	  					dataType: 'json',
+	  					data: $("#loginForm").serialize(),
+	  					success: function (data) {
+	                     if(data.state) {
+	                    	 window.location.href = "{:U('Index/index')}";
+	                     } else {
+	                    	 swal(data.msg, "", false);
+	                     }
+		  				}
+	  				});
+	  			}
+    	    })
+    	});
+    </script>
+</body>
+</html>

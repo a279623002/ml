@@ -1,0 +1,40 @@
+<footer class="page-footer fixed-footer" id="footer">
+			<ul>
+				<li >
+					<a href="/">
+						<i class="iconfont icon-shouye"></i>
+						<p>首页</p>
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Home/Goods/cate')}">
+						<i class="iconfont icon-icon04"></i>
+						<p>分类</p>
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Home/User/shopCar')}">
+						<i class="iconfont icon-gouwuche"></i>
+						<p>购物车</p>
+					</a>
+				</li>
+				<li>
+					<a href="{:U('Home/User/index')}">
+						<i class="iconfont icon-yonghuming"></i>
+						<p>我的</p>
+					</a>
+				</li>
+			</ul>
+</footer>
+<script type="text/javascript">
+	var temp='{$active}';
+	//alert(temp);
+	$(function(){
+		$('.page-footer>ul>li>a').each(function(){
+			var hr=$(this).attr('href');
+			var cs=hr.substring(hr.lastIndexOf('/')+1,hr.lastIndexOf('.'));
+			if(cs==temp)
+				$(this).parent().addClass('active');
+		})
+	})
+</script>

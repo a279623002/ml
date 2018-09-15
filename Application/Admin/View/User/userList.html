@@ -1,0 +1,116 @@
+<include file="Public/header" />
+<style>
+    .pages a,
+    .pages span {
+        display: inline-block;
+        padding: 2px 5px;
+        margin: 0 1px;
+        border: 1px solid #f0f0f0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+    .pages a,
+    .pages li {
+        display: inline-block;
+        list-style: none;
+        text-decoration: none;
+        color: #58A0D3;
+    }
+
+    .pages a.first,
+    .pages a.prev,
+    .pages a.next,
+    .pages a.end {
+        margin: 0;
+    }
+
+    .pages a:hover {
+        border-color: #50A8E6;
+    }
+
+    .pages span.current {
+        background: #50A8E6;
+        color: #FFF;
+        font-weight: 700;
+        border-color: #50A8E6;
+    }
+
+    .token {
+        border: none;
+    }
+</style>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h3>用户列表</h3>
+                    <form action="{:U('Admin/User/userList')}" method="post" class="form-horizontal m-t">
+                        <div class="form-group" style="width:150px;float:left;margin-right:0px;margin-left:15px;">
+                            <input class="form-control" type="text" name="realname" placeholder="用户名" />
+                        </div>
+                        <div class="form-group" style="width:150px;float:left;margin-right:0px;margin-left:15px;">
+                            <input class="form-control" type="number" name="mobile" placeholder="手机号" />
+                        </div>
+                        <div class="form-group" style="width:150px;float:left;margin-right:0px;margin-left:15px;">
+                            <select class="form-control m-b" name="sort">
+                                <option value="">请选择排序规则</option>
+                                <option value="1">最新注册</option>
+                                <option value="2">最近登陆</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" type="submit" style="margin-left:20px;">搜索</button>
+                    </form>
+                    <div class="ibox-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>头像</th>
+                                        <th>微信名</th>
+                                        <th>真实姓名</th>
+                                        <th>性别</th>
+                                        <th>手机</th>
+                                        <th>积分</th>
+                                        <th>所在地</th>
+                                        <th>注册时间</th>
+                                        <th>最近登陆</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <foreach name="list" item="item" key="key">
+                                        <tr>
+                                            <td>{$item.user_id}</td>
+                                            <td><img src="{$item.headimgurl}" width="50px" height="50px"></td>
+                                            <td>{$item.nickname}</td>
+                                            <td>{$item.realname}</td>
+                                            <td>
+                                                <if condition="($item.sex eq 1)">男
+                                                    <else />女
+                                                </if>
+                                            </td>
+                                            <td>{$item.mobile}</td>
+                                            <td>{$item.point}</td>
+                                            <td>{$item.country}--{$item.province}--{$item.city}</td>
+                                            <td>{$item.addtime}</td>
+                                            <td>{$item.updatetime}</td>
+                                        </tr>
+                                    </foreach>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pages">{$page}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public/footer" />
+
+</body>
+
+</html>

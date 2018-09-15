@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="font-size: 38.333px;">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>商品详情</title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/base.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/detail.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mui.min.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loaders.min.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loading.css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/swiper.min.css">
+	<script src="__PUBLIC__/Home/js/rem.js"></script>
+	<script src="__PUBLIC__/Home/js/jquery.min.js" type="text/javascript"></script>
+	<script src="__PUBLIC__/Home/js/others.js"></script>
+	<script src="__PUBLIC__/Home/js/swiper.jquery.min.js"></script>
+	<script src="__PUBLIC__/Home/js/comon.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(window).load(function () {
+			$(".loading").addClass("loader-chanage")
+			$(".loading").fadeOut(300);
+
+			$('.btnone').click(function (e) {
+				e.preventDefault();
+				$('.buynowmashang').submit();
+			})
+
+			$('.photo-item').click(function () {
+
+				var im = new Image();
+				im.src = $(this).children('img').attr('src');
+				im.onload = function () {
+					$('.prievimg>img').remove();
+					$(im).css('max-width', '100%');
+					$('.prievimg').append(im);
+
+					var temptop = ($('.prievimg').height() - $(im).height()) / 2;
+					$('.prievimg>img').css('margin-top', temptop + 'px');
+				}
+
+
+
+				$('.prievimg').show();
+			})
+
+			$('.closepriev,.prievimg').click(function () {
+				$('.prievimg').hide();
+			});
+
+			$('.productdetail').click(function (e) {
+				e.preventDefault();
+				x = document.getElementById("iconfont");
+				if ($('.syhsetcontent').is(':hidden')) {
+					rotateDIV(0);
+					$('.syhsetcontent').slideDown();
+				} else {
+					rotateDIV(90);
+					$('.syhsetcontent').slideUp();
+				}
+			});
+
+			$('.productevalus').click(function (e) {
+				e.preventDefault();
+				x = document.getElementById("evaiconfont");
+				if ($('.evalists').is(':hidden')) {
+					rotateDIV(0);
+					$('.evalists').slideDown();
+				} else {
+					rotateDIV(90);
+					$('.evalists').slideUp();
+				}
+			});
+
+
+		})
+		function toshare() {
+			$(".am-share").addClass("am-modal-active");
+			if ($(".sharebg").length > 0) {
+				$(".sharebg").addClass("sharebg-active");
+			} else {
+				$("body").append('<div class="sharebg"></div>');
+				$(".sharebg").addClass("sharebg-active");
+			}
+			$(".sharebg-active,.share_btn").click(function () {
+				$(".am-share").removeClass("am-modal-active");
+				setTimeout(function () {
+					$(".sharebg-active").removeClass("sharebg-active");
+					$(".sharebg").remove();
+				}, 300);
+			})
+		}
+
+		var x, y, n = 0, ny = 0, rotINT, rotYINT, flag = 0, flagone = 0
+		function rotateDIV(model) {
+
+
+
+
+			if (model != 0) {
+				n = model;
+			}
+			clearInterval(rotINT)
+			rotINT = setInterval("startRotate(" + model + ")", 0.1)
+		}
+
+		function startRotate(model) {
+			if (model == 0) {
+				n = n + 1
+			} else
+				--n;
+			x.style.transform = "rotate(" + n + "deg)"
+			x.style.webkitTransform = "rotate(" + n + "deg)"
+			x.style.OTransform = "rotate(" + n + "deg)"
+			x.style.MozTransform = "rotate(" + n + "deg)"
+			if (n == 90 || (model != 0 && n == 0)) {
+				clearInterval(rotINT)
+				if (n == 90) { n = 0 }
+			}
+		}
+	</script>
+	<style>
+		#LRdiv0 {
+			display: none !important;
+		}
+		
+		#detail_img img {
+			width: 100% !important;
+		}
+	</style>
+</head>
+<!--loading页开始-->
+
+<body>
+	<div style="display:none;" id="consult">
+		<a href="javascript:void(0);" rel="nofollow" onclick="openZoosUrl();LR_HideInvite();return false;" class="consult-a"> class="wP"&gt;</a>
+	</div>
+	<link href="http://lvt.zoosnet.net/js/JS5.css" rel="stylesheet" type="text/css">
+	<div id="LRdiv0" style="display: block;">
+		<div id="LRfloater0" style="z-index: 2147483647; left: 0px; top: 150px; position: fixed !important;">
+			<div id="swtColse" style="width:20px; height:15px; top:0px; right:0px; position:absolute;background-image: url(http://lvt.zoosnet.net/LR/closeimg/7.gif);background-repeat: no-repeat;background-position: right top;cursor:pointer;"
+			 onclick="LR_Hidemobileinvite(0);onlinerIcon0.hidden();"></div>
+			<img title="如果您有什么问题,请点击此处进行即时沟通;" alt="如果您有什么问题,请点击此处进行即时沟通;" src="http://lvt.zoosnet.net/lr/images/online_cn3.gif" style="cursor:pointer"
+			 onclick="openZoosUrl('chatwin');">
+		</div>
+	</div>
+	<div id="LRdiv1" style="display:none;"></div>
+	<div id="LRdiv2" style="display:none;"></div>
+	<div id="LRdiv3" style="display:none;"></div>
+	<div class="swtCenter swt">
+		<span class="closeBtn_swt"></span>
+		<a href="/zt/2017july/" style="position: absolute;width: 100%;height:2.7rem;top: 15%;z-index:3;"></a>
+
+		<script type="text/javascript">
+			$(window).load(function () {
+				$(".loading").addClass("loader-chanage")
+				$(".loading").fadeOut(300);
+
+				$('.btnone').click(function (e) {
+					e.preventDefault();
+					$('.buynowmashang').submit();
+				})
+
+				$('.photo-item').click(function () {
+
+					var im = new Image();
+					im.src = $(this).children('img').attr('src');
+					im.onload = function () {
+						$('.prievimg>img').remove();
+						$(im).css('max-width', '100%');
+						$('.prievimg').append(im);
+
+						var temptop = ($('.prievimg').height() - $(im).height()) / 2;
+						$('.prievimg>img').css('margin-top', temptop + 'px');
+					}
+
+
+
+					$('.prievimg').show();
+				})
+
+				$('.closepriev,.prievimg').click(function () {
+					$('.prievimg').hide();
+				});
+
+				$('.productdetail').click(function (e) {
+					e.preventDefault();
+					x = document.getElementById("iconfont");
+					if ($('.syhsetcontent').is(':hidden')) {
+						rotateDIV(0);
+						$('.syhsetcontent').slideDown();
+					} else {
+						rotateDIV(90);
+						$('.syhsetcontent').slideUp();
+					}
+				});
+
+				$('.productevalus').click(function (e) {
+					e.preventDefault();
+					x = document.getElementById("evaiconfont");
+					if ($('.evalists').is(':hidden')) {
+						rotateDIV(0);
+						$('.evalists').slideDown();
+					} else {
+						rotateDIV(90);
+						$('.evalists').slideUp();
+					}
+				});
+
+
+			})
+			function toshare() {
+				$(".am-share").addClass("am-modal-active");
+				if ($(".sharebg").length > 0) {
+					$(".sharebg").addClass("sharebg-active");
+				} else {
+					$("body").append('<div class="sharebg"></div>');
+					$(".sharebg").addClass("sharebg-active");
+				}
+				$(".sharebg-active,.share_btn").click(function () {
+					$(".am-share").removeClass("am-modal-active");
+					setTimeout(function () {
+						$(".sharebg-active").removeClass("sharebg-active");
+						$(".sharebg").remove();
+					}, 300);
+				})
+			}
+
+			var x, y, n = 0, ny = 0, rotINT, rotYINT, flag = 0, flagone = 0
+			function rotateDIV(model) {
+
+
+
+
+				if (model != 0) {
+					n = model;
+				}
+				clearInterval(rotINT)
+				rotINT = setInterval("startRotate(" + model + ")", 0.1)
+			}
+
+			function startRotate(model) {
+				if (model == 0) {
+					n = n + 1
+				} else
+					--n;
+				x.style.transform = "rotate(" + n + "deg)"
+				x.style.webkitTransform = "rotate(" + n + "deg)"
+				x.style.OTransform = "rotate(" + n + "deg)"
+				x.style.MozTransform = "rotate(" + n + "deg)"
+				if (n == 90 || (model != 0 && n == 0)) {
+					clearInterval(rotINT)
+					if (n == 90) { n = 0 }
+				}
+			}
+		</script>
+
+		<!--loading页开始-->
+		<div class="loading loader-chanage" style="display: none;">
+			<div class="loader">
+				<div class="loader-inner pacman">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</div>
+		</div>
+		<!--loading页结束-->
+		<!--	
+		<div style="
+		position: fixed;
+		top: 23%;
+		color: white;
+		left: 16%;
+	">
+	  <div style="
+		background: #ea2762;
+		padding: 8% 6%;
+		border-top-right-radius: 102%;
+	">本月签到</div>
+	
+		<div style="padding: 8% 6% ; ">	
+			<p style="
+			background: #e04776;
+		">
+			  <span>日</span>
+			  <span>一</span>
+			  <span>二</span>
+			  <span>三</span>
+			  <span>四</span>
+			  <span>五</span>
+			  <span>六</span>
+			 </p>
+		 </div>
+	  </div>-->
+
+
+
+		<!--header star-->
+		<header class="mui-bar mui-bar-nav" id="header">
+			<a class="btn" href="javascript:history.go(-1)">
+				<i class="iconfont icon-fanhui"></i>
+			</a>
+			<h4>商品详情</h4>
+		</header>
+		<!--header end-->
+
+		<div class="warp warptwo clearfloat">
+			<div class="detail clearfloat">
+				<!--banner star-->
+
+				<div class="banner swiper-container swiper-container-horizontal">
+					<div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-1656px, 0px, 0px);">
+						<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="3" style="width: 414px;">
+							<a href="javascript:void(0)">
+								<img class="swiper-lazy swiper-lazy-loaded" alt="" src="__PUBLIC__/image/xj3.jpg">
+							</a>
+						</div>
+						<foreach name='slider' item='vo' key='k'>
+							<div class="swiper-slide" data-swiper-slide-index="0" style="width: 414px;">
+								<a href="javascript:void(0)">
+									<img class="swiper-lazy swiper-lazy-loaded" alt="" src="__PUBLIC__/../Uploads/Slider/{$vo.image}">
+								</a>
+							</div>
+						</foreach>
+					</div>
+					<div class="swiper-pagination swiper-pagination-clickable">
+						<foreach name='slider' item='vo' key='k'>
+							<span class="swiper-pagination-bullet"></span>
+						</foreach>
+					</div>
+				</div>
+				<!--banner end-->
+				<div class="top clearfloat box-s">
+					<div class="shang clearfloat">
+						<div class="zuo clearfloat fl over2 box-s">
+							{$data.name} </div>
+						<div class="you clearfloat fr" style="display: none;">
+							<i class="iconfont icon-fenxiang"></i>
+							<p>分享</p>
+						</div>
+					</div>
+					<div class="xia clearfloat">
+						<p class="jifen fl box-s">
+							<samp id="price">
+								<span id="money">{$data.price}元</span>
+							</samp>
+							<!--积分-->
+						</p>
+						<span class="fr">销量{$data.sell}件</span>
+					</div>
+				</div>
+				<div class="productdetail middle clearfloat box-s">
+					<a>
+						<span class="fl">商品详情</span>
+						<i id="iconfont" class="iconfont icon-jiantou1 fr"></i>
+					</a>
+				</div>
+				<!-- <div class="middle clearfloat box-s syhsetcontent" style="padding: 0px; border-top: #fff;"> -->
+				<div class="middle clearfloat box-s" style="padding: 0px; border-top: #fff;" id="detail_img">
+					<!-- <p>
+						<img src="__PUBLIC__/../Uploads/Goods/{$data.image}">
+					</p> -->
+					{$data.detail}
+				</div>
+				<div class="productevalus middle clearfloat box-s">
+					<a>
+						<span class="fl">商品评价</span>
+						<i id="evaiconfont" class="iconfont icon-jiantou1 fr"></i>
+					</a>
+				</div>
+
+				<ul class="evalists" style="padding: 10px;">
+
+				</ul>
+
+			</div>
+		</div>
+
+		<!--footerone star-->
+		<div class="footerone clearfloat">
+			<div class="left clearfloat fl">
+				<ul>
+					<li style="display: flex;justify-content: center; align-items: center;padding-top: 0;">
+						<div>
+							<a href="/">
+								<i class="iconfont icon-shangcheng"></i>
+								<p>商城</p>
+							</a>
+						</div>
+					</li>
+					<li style="display: flex;justify-content: center; align-items: center;padding-top: 0;" onclick="openZoosUrl();LR_HideInvite();return false;">
+						<div>
+							<a>
+								<i class="iconfont icon-kefu1"></i>
+								<p>客服</p>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="right clearfloat fl">
+				<span class="btn fl" onclick="toshare()">加入购物车</span>
+				<form method="post" class="buynowmashang" action="{:U('Home/Goods/confirm')}">
+					<input type="hidden" id="goods_id" name="goods_id" value="{$data.goods_id}">
+					<span class="btn btnone fl">立即购买</span>
+				</form>
+			</div>
+		</div>
+		<!--footerone end-->
+
+		<!--弹出购物车内容-->
+		<div class="am-share">
+			<div class="am-share-footer">
+				<button class="share_btn">
+					<img src="https://int.stmingliu.cn/static/image/chahao.png">
+				</button>
+			</div>
+			<div class="am-share-sns box-s">
+				<div class="sdetail clearfloat">
+					<div class="top clearfloat">
+						<div class="tu clearfloat fl">
+							<span></span>
+							<img src="__PUBLIC__/../Uploads/Goods/{$data.image}">
+						</div>
+						<div class="you clearfloat fl">
+							<p class="tit">{$data.name}</p>
+							<span id="allprice"></span>
+							<span id="allmoney">{$data.price}元</span>
+							<span id="allmmoneys"></span>
+							<!--积分
+								-->
+						</div>
+					</div>
+					<!--
+						<div class="middle clearfloat">
+							<p>颜色分类</p>
+							<div class="xia clearfloat">
+								<ul>
+									<li class="ra3 cur">蓝色</li>
+									<li class="ra3">白色</li>
+								</ul>
+							</div>
+						</div>
+						<div class="middle clearfloat">
+							<p>机身内存</p>
+							<div class="xia clearfloat">
+								<ul>
+									<li class="ra3 cur">120G</li>
+									<li class="ra3">60G</li>
+								</ul>
+							</div>
+						</div>-->
+					<div class="bottom clearfloat">
+						<p class="fl">购买数量</p>
+						<div class="you clearfloat fr">
+							<ul>
+								<li id="down">
+									<img src="https://int.stmingliu.cn/static/image/jian.jpg">
+								</li>
+								<li id="count">1</li>
+								<li id="upcount">
+									<img src="https://int.stmingliu.cn/static/image/jia.jpg">
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<form method="post" action="#">
+				<input type="hidden" name="pid" value="53">
+				<input type="hidden" id="number" name="number" value="1">
+				<button type="button" onclick="confirm();" class="shop-btn db">确定</button>
+			</form>
+		</div>
+
+
+		<div class="prievimg" style="text-align: center;  z-index: 10; width: 100%;height: 100% ; position: fixed; top: 0px;left: 0px; display: none;     background-color: rgba(0, 0, 0, 0.52);z-index: 105; ">
+			<div class="closepriev" style="position:absolute;top: 30px;right: 30px;color: white;z-index: 10; background: rgba(0, 0, 0, 0.39);padding: 0.2rem 0.3rem;border-radius: 50%;">X</div>
+			<img style="max-width: 100%;" src="">
+		</div>
+		<script type="text/javascript">
+			var down = document.getElementById("down");
+			var count = document.getElementById("count");
+			var upcount = document.getElementById('upcount');
+
+			var money = document.getElementById("money");
+			var price = document.getElementById('price');
+			var mmoneys = document.getElementById("mmoneys");
+
+			var allmoney = document.getElementById("allmoney");
+			var allprice = document.getElementById('allprice');
+			var allmmoneys = document.getElementById("allmmoneys");
+
+
+			var number = document.getElementById('number');
+
+			var oldprice = parseInt(price.innerHTML);
+
+			var oldmoney = money == null ? 0 : parseInt(money.innerHTML);
+			var oldmmoneys = mmoneys == null ? 0 : parseInt(mmoneys.innerHTML);
+
+
+			function changeNumber() {
+				number.value = count.innerHTML;
+
+				if (oldmoney)
+					allmoney.innerHTML = (oldmoney * count.innerHTML) + '元';
+				if (oldmmoneys)
+					allmmoneys.innerHTML = (oldmmoneys * count.innerHTML) + 'M金';
+				if (oldprice)
+					allprice.innerHTML = (oldprice * count.innerHTML) + '积分';
+
+
+			}
+
+			window.onload = function () {
+				down.onclick = function () {
+					if (count.innerHTML > 1) {
+						count.innerHTML--;
+					} else {
+						count.innerHTML = 1;
+					}
+					changeNumber();
+				}
+
+				upcount.onclick = function () {
+					count.innerHTML++;
+					changeNumber();
+				}
+
+				$(".middle .xia li").click(function () {
+					$(this).addClass('cur').siblings().removeClass('cur');
+				});
+
+			}
+			changeNumber();
+		</script>
+		<!--footer star-->
+		<include file="Public/footer" />
+
+		<script type="text/javascript">
+			var temp = 'classification';
+			//alert(temp);
+			$(function () {
+				$('.page-footer>ul>li>a').each(function () {
+					var hr = $(this).attr('href');
+					var cs = hr.substring(hr.lastIndexOf('/') + 1, hr.lastIndexOf('.'));
+					if (cs == temp)
+						$(this).parent().addClass('active');
+				})
+			})
+		</script>
+		<!--footer end-->
+	</div>
+
+	<script>
+		function confirm() {
+			$.ajax({
+				url: '{:U('Home/User/shopAdd')}',
+				type: 'post',
+				data: { 'goods_id': $('#goods_id').val(), 'sum': $('#count').text() },
+				dataType: 'json',
+				success: function (data) {
+					if (data.state) {
+						alert(data.msg);
+						window.location.href = "{:U('Home/User/shopCar')}";
+					} else {
+						alert(data.msg);
+						window.location.reload();
+					}
+				}
+			})
+		}
+	</script>
+</body>
+
+</html>

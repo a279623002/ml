@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)http://www.erdangjiade.com/modals/19/1962/demo/shopcar.html -->
+<html lang="zh-CN" style="font-size: 38.333px;">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>购物车</title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/base.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/shopcar.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mui.min.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loaders.min.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loading.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/layer.css" />
+
+	<script src="__PUBLIC__/Home/js/rem.js"></script>
+	<script src="__PUBLIC__/Home/js/jquery.min.js" type="text/javascript"></script>
+	<script src="__PUBLIC__/Home/js/layer.js"></script>
+
+	<link href="__PUBLIC__/Home/css/layer(1).css" type="text/css" rel="styleSheet" id="layermcss">
+	<script type="text/javascript">
+		$(window).load(function () {
+			$(".loading").addClass("loader-chanage")
+			$(".loading").fadeOut(300)
+		})
+	</script>
+	<style type="text/css">
+		stmlmoney,
+		stmoney {
+			color: #ff4141;
+		}
+	</style>
+</head>
+<!--loading页开始-->
+
+<body>
+	<div class="loading loader-chanage" style="display: none;">
+		<div class="loader">
+			<div class="loader-inner pacman">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<!--loading页结束-->
+
+	<!--header star-->
+	<header class="mui-bar mui-bar-nav" id="header">
+		<a class="btn" href="javascript:history.go(-1)">
+			<i class="iconfont icon-fanhui"></i>
+		</a>
+		<h4>购物车</h4>
+	</header>
+	<!--header end-->
+
+	<div class="warp warptwo clearfloat">
+		<div class="shopcar clearfloat">
+			<foreach name='list' item='vo' key='k'>
+				<div class="list clearfloat fl">
+					<div class="xuan clearfloat fl">
+						<div class="radio">
+							<label>
+								<input data-id="{$vo.id}" type="checkbox" name="id" value="">
+							</label>
+						</div>
+					</div>
+					<a href="javascript:void(0)">
+						<div class="tu clearfloat fl">
+							<span></span>
+							<img src="__PUBLIC__/../Uploads/Goods/{$vo.goods.image}">
+						</div>
+						<div class="right clearfloat fl">
+							<p class="tit over">{$vo.goods.name}</p>
+							<p class="jifen over">
+								{$vo.goods.price}￥
+							</p>
+							<div class="bottom clearfloat">
+								<div class="zuo clearfloat fl">
+									<ul>
+										<li>
+											<img src="__PUBLIC__/Home/image/jian.jpg">
+										</li>
+										<li>{$vo.sum}</li>
+										<li>
+											<img src="__PUBLIC__/Home/image/jia.jpg">
+										</li>
+									</ul>
+								</div>
+								<i data-id="{$vo.id}" class="iconfont icon-lajixiang fr"></i>
+							</div>
+						</div>
+					</a>
+				</div>
+			</foreach>
+		</div>
+	</div>
+
+	<!--settlement star-->
+	<form id="arrshopids" method="post" action="{:U('Home/User/confirm')}">
+		<div class="settlement clearfloat">
+			<div class="zuo clearfloat fl box-s">
+				合计：
+				<span></span>
+				<stmlmoney></stmlmoney>
+				<stmoney></stmoney>
+			</div>
+
+			<button class="fl db">
+				立即结算
+			</button>
+
+		</div>
+	</form>
+	<!--settlement end-->
+
+	<!--footer star-->
+
+	<include file="Public/footer" />
+	<!--footer end-->
+
+	<script type="text/javascript">
+		$('input[type="checkbox"]').click(function () { // 找到勾选按钮，绑定事件
+
+			if ($(this).is(':checked') && $('#shops' + $(this).data('id')).length == 0) {
+				var tempnumber = parseInt($(this).parents('.list').find('.zuo').children('ul').children('li').eq(1).text().trim());
+
+				$('#arrshopids').append("<input id='shops" + $(this).data('id') + "' type='hidden' name='shopids[]' value='" + $(this).data('id') + ',' + tempnumber + "' />");
+			}
+
+
+			tatol();
+		});
+
+		$('[name=sex]:checkbox').each(function () {
+
+			if ($(this).is(':checked')) {
+				$(this).prop("checked", false);
+			}
+		})
+		$('#arrshopids').find('button').click(function (e) {
+
+
+			if ($('#arrshopids').find('input').length == 0) {
+				layer.open({
+					content: '请选择商品！',
+					btn: ['确定'],
+					yes: function (index) {
+						//alert($('[name=sex]:checkbox').length);
+						$('[name=sex]:checkbox').each(function () {
+
+							if ($(this).is(':checked')) {
+								$(this).prop("checked", false);
+							}
+						})
+						layer.closeAll();
+					}
+				});
+				e.preventDefault();
+				return false;
+			}
+		});
+		$('.list ul img').click(function () { // 找到加减按钮，绑定点击事件
+			var val = $(this).parent().parent().children().eq(1);
+			if ($(this).parent().index()) {
+				val.html(parseInt(val.html()) + 1);
+			} else {
+				val.html(val.html() > 1 ? parseInt(val.html()) - 1 : 1);
+			}
+
+			var temp = $(this).parent().parent().parent().next().data('id');
+			if ($('#shops' + temp).length > 0) {
+				document.getElementById('shops' + temp).value = temp + ',' + parseInt(val.html());
+			}
+			tatol();
+		});
+		$('.icon-lajixiang').click(function () { // 找到删除按钮，绑定点击事件
+			var self = this;
+			layer.open({
+				content: '确定删除？',
+				btn: ['确定', '取消'],
+				yes: function (index) {
+					$.ajax({
+						type: "post",
+						url: '{:U('Home/User/shopDel')}',
+						data: { id: $(self).data('id') },
+						dataType: "json",
+						success: function (data) {
+							if (data.state) {
+
+							} else {
+								alert('删除失败！');
+							}
+						}
+
+					})
+					$(self).parent().parent().parent().parent().remove();
+					layer.closeAll();
+					tatol();
+				}
+			});
+		});
+		var tatol = function () { // 计算总积分
+			var count = 0;
+			var money = mmoneys = 0;
+			$('.list').map(function (index, item) {
+				var $el = $(item);
+				if ($el.find('input[type="checkbox"]').is(":checked")) {
+					if (!isNaN(parseFloat($el.find('.jifen').html())))
+						count += parseFloat($el.find('.jifen').html()) * parseInt($el.find('.zuo li').eq(1).html());
+					if ($el.find('.jifen>#money').length > 0)
+						money += parseFloat($el.find('.jifen>#money').html()) * parseInt($el.find('.zuo li').eq(1).html());
+					if ($el.find('.jifen>#mmoneys').length > 0)
+						mmoneys += parseFloat($el.find('.jifen>#mmoneys').html()) * parseInt($el.find('.zuo li').eq(1).html());
+				}
+			});
+
+
+			if (count > 0) {
+				//+ '积分'
+				$('.settlement span').html(count + '元');
+			} else {
+				$('.settlement span').html('');
+			}
+			if (money > 0) {
+				if ($('.settlement span').text().trim() != '') money = '+' + money;
+				$('.settlement stmlmoney').html(money + '元');
+			} else {
+				$('.settlement stmlmoney').html('');
+			}
+			if (mmoneys > 0) {
+				if ($('.settlement span').text().trim() != '') mmoneys = '+' + mmoneys;
+				$('.settlement stmoney').html(mmoneys + 'M金');
+			} else {
+				$('.settlement stmoney').html('');
+			}
+		}
+	</script>
+
+
+
+
+</body>
+
+</html>

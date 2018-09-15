@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)http://www.erdangjiade.com/modals/19/1962/demo/center.html -->
+<html style="font-size: 44.444px;">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>会员中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/base.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/center.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loaders.min.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loading.css">
+    <script src="__PUBLIC__/Home/js/rem.js"></script>
+    <script src="__PUBLIC__/Home/js/jquery.min.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/Home/js/layer.js"></script>
+    <link href="__PUBLIC__/Home/css/layer.css" type="text/css" rel="styleSheet" id="layermcss">
+
+</head>
+<!--loading页开始-->
+
+<body style="background-color: #f0f0f0">
+
+    <!--header star-->
+    <header class="mui-bar mui-bar-nav" id="header">
+        <a class="btn" href="javascript:history.go(-1)">
+            <i class="iconfont icon-fanhui"></i>
+        </a>
+        <h4>会员账号设置</h4>
+    </header>
+    <form class="mui-input-group" style="margin-top:15%;" id="taskForm">
+        <div class="mui-input-row">
+            <label style="color:gray;">微信名</label>
+            <input type="text" class="mui-input-clear" placeholder="{$user.nickname}" style="line-height: 1.4rem;" disabled>
+        </div>
+        <div class="mui-input-row">
+            <label style="color:gray;">最近登录</label>
+            <input type="text" class="mui-input-clear" placeholder="{$user.updatetime}" style="line-height: 1.4rem;" disabled>
+        </div>
+        <div class="mui-input-row">
+            <label style="color:gray;">所在地</label>
+            <input type="text" class="mui-input-clear" placeholder="{$user.country}--{$user.province}--{$user.city}" style="line-height: 1.4rem;" disabled>
+        </div>
+        <div class="mui-input-row">
+            <label style="color:gray;">积分</label>
+            <input type="text" class="mui-input-clear" placeholder="{$user.point}" style="line-height: 1.4rem;" disabled>
+        </div>
+        <div class="mui-input-row">
+            <label style="color:skyblue;">姓名</label>
+            <input name="realname" type="text" class="mui-input-password" placeholder="{$user.realname}" style="line-height: 1.4rem;">
+        </div>
+        <div class="mui-input-row">
+            <label style="color:skyblue;">手机</label>
+            <input name="mobile" type="number" class="mui-input-password" placeholder="{$user.mobile}" style="line-height: 1.4rem;">
+        </div>
+        <div class="mui-button-row">
+            <button type="button" onclick="editUser();" class="mui-btn mui-btn-primary">修改</button>
+        </div>
+    </form>
+
+    <!--尾部-->
+    <include file="Public/footer" />
+
+    <script>
+        function editUser() {
+            $.ajax({
+                url: '{:U('Home/User/editUser')}',
+                type: 'post',
+                dataType: 'json',
+                data: $('#taskForm').serialize(),
+                success: function(data) {
+                    alert(data.msg);
+                    if (data.state) {
+                        window.location.reload();
+                    }
+                }
+            })
+        }
+    </script>
+
+
+</body>
+
+</html>

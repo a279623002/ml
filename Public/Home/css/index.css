@@ -1,0 +1,321 @@
+/*抢购栏目*/
+.tejialanmu{
+    padding: 0.5rem 0.2rem;
+    background: #fff6c4;
+    text-align: center;
+        display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tejialanmu p{
+    color: #000000;
+}
+.rightbtn > img{
+    width: 2.5rem;
+}
+.tejialanmu>div{
+    display: inline-block;
+    text-align: left;
+}
+.tejialanmu .rightbtn{
+    text-align: center;
+    line-height: 1rem;
+}
+.tejialanmu .rightbtn .titlename{
+    color: #5f5e5e;
+    font-weight: bold;
+}
+.buystrong{
+    padding: 0.2rem;
+    background: linear-gradient( #949393 3% , #1b1818 60%, #1b1818);
+    display: inline-block;
+    border-radius: 0.2rem;
+    color: white;
+    font-size: 0.6rem;
+}
+.maohao{
+    font-size: 0.6rem;
+    font-weight: bold;
+}
+
+/*购买显示通知*/
+.buymessage{
+    background: rgba(255, 255, 255, 0.5);
+    position: fixed;
+    top: 1.5rem;
+    z-index: 10;
+    width: 100%;
+    height: 0.9rem;
+    display: block;
+    line-height: 0.9rem;
+    text-align: center;
+}
+.gdbuymessagelt{
+    display: inline-block;
+    text-align: center;
+    float: left;
+}
+.gdbuymessagelt:not(:last-child){
+    margin-right: 5rem;
+}
+.gundongtiaoxlist{
+    position: absolute;
+
+}
+
+/*banner区域*/
+.banner img {
+    display: block;
+    width: 100%;
+}
+/*第一栏分类*/
+.cation {
+    width: 100%;
+    background-color: #fff;
+    padding: 4% 2%;
+}
+
+.cation ul li {
+    width: 25%;
+    text-align: center;
+    float: left;
+}
+
+.cation ul li img {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.cation ul li p {
+    color: #666666;
+    font-size: .45rem;
+    margin-bottom: 0;
+}
+/*精品任选*/
+.boutique,
+.onnew {
+    width: 100%;
+    padding: 0 2%;
+}
+
+.boutit {
+    width: 50%;
+    margin: 0 auto;
+    position: relative;
+    height: 1.2rem;
+    text-align: center;
+}
+
+.boutit span {
+    display: block;
+    position: absolute;
+    top: .55rem;
+    width: 100%;
+    border-top: 3px solid #00cc7d;
+}
+
+.boutit samp {
+    line-height: 1.2rem;
+    color: #000000;
+    position: relative;
+    height: 1.2rem;
+    padding: 0 3%;
+    background-color: #efeff4;
+    font-size: .45rem;
+}
+
+.boutique .content,
+.onnew .content {
+    width: 100%;
+}
+
+.boutique .content ul li {
+    width: 100%;
+    margin-bottom: 3%;
+}
+
+.boutique .content ul li:last-child {
+    margin-bottom: 0;
+}
+
+.boutique .content ul li img {
+    width: 100%;
+}
+/*精品推荐*/
+.onnew .text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.red {
+    color: red;
+    font-weight: 600;
+}
+.onnew .content .top .list .zuo .tit,
+.onnew .content .bottom .list .shang .tit,
+.theme .content .list .shang .tit {
+    color: #000000;
+    font-size: .3rem;
+    width: 100%;
+    margin-bottom: 0;
+}
+.onnew .content .top .list .zuo span,
+.onnew .content .bottom .list .shang span,
+.theme .content .list .shang span {
+    font-size: .3rem;
+    width: 100%;
+}
+.onnew .content .top {
+    width: 100%;
+}
+
+.onnew .content .top .list {
+    width: 49%;
+    padding: 3% 2% 0;
+    margin-right: 2%;
+    background-color: #fff;
+}
+
+.onnew .content .top .list:last-child {
+    margin-right: 0;
+}
+
+.onnew .content .top .list .zuo {
+    width: 60%;
+}
+
+.onnew .content .top .list .tu {
+    width: 40%;
+    height: 2.5rem;
+    font-size: 0;
+    text-align: center;
+}
+
+.onnew .content .top .list .tu span {
+    display: inline-block;
+    height: 100%;
+    line-height: 0;
+    vertical-align: middle;
+}
+
+.onnew .content .top .list .tu img {
+    max-width: 100%;
+    vertical-align: middle;
+    max-height: 2.5rem;
+}
+
+.onnew .content .bottom {
+    width: 100%;
+    margin-top: 2%;
+}
+
+.onnew .content .bottom .list {
+    width: 32%;
+    height: 4rem;
+    margin-right: 2%;
+    background-color: #fff;
+}
+
+.onnew .content .bottom .list:last-child {
+    margin-right: 0;
+}
+
+.onnew .content .bottom .list .shang {
+    padding: 5%;
+    width: 100%;
+    height: 1.2rem;
+}
+/*1-5F*/
+.onnew .content .bottom .list .tu,
+.theme .content .list .tu {
+    width: 100%;
+    height: 2.8rem;
+    text-align: center;
+    font-size: 0;
+}
+
+.onnew .content .bottom .list .tu span,
+.theme .content .list .tu span {
+    display: inline-block;
+    height: 100%;
+    line-height: 0;
+    vertical-align: middle;
+}
+
+.onnew .content .bottom .list .tu img,
+.theme .content .list .tu img {
+    max-width: 100%;
+    vertical-align: middle;
+    max-height: 2.8rem;
+}
+
+.theme {
+    width: 100%;
+}
+
+.theme .content {
+    width: 100%;
+    background-color: #fff;
+    /*padding-top: 0.26rem;*/
+}
+
+.theme .content .list {
+    width: 33.33%;
+    padding: 0.3rem 0;
+    border-right: 1px solid #f1f1f1;
+    float: left;
+    border-bottom: 1px solid #f1f1f1;
+
+    text-align: center;
+}
+
+.theme .content .list .shang {
+    padding: 6% 5%;
+    width: 100%;
+    padding-bottom: 0px;
+}
+
+.theme .content .list:nth-child(3n) {
+    border-right: none;
+}
+#header{
+    background: url(../image/stmingliulogo.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+}
+.addlinew{
+    background-color: #1f1e2f;
+        text-align: center; 
+}
+.addlinew>div {
+    border-bottom: 1px solid #b3b3b3;
+    margin: 0 2%;
+    width: 96%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.addlinew>div>a {
+    display: inline-block;
+    width: auto;
+    color: white;
+        padding: 0.37rem 0;
+}
+.addlinew>p {
+    color: white;
+    font-size: 0.51rem;
+}
+.addlinew>p>a{
+        display: flex;
+    align-items: center;
+    color: white;
+    padding: 5% 0;
+    justify-content: center;
+}
+
+/***********add style css by 2017/11/17****************/
+#mmoneys, #money {
+    font-size: 0.3rem !important;
+    width: auto ;
+}

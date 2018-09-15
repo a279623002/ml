@@ -1,0 +1,102 @@
+[ 2018-08-31T09:28:44+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001716s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002316s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002397s ]
+SQL: SHOW COLUMNS FROM `ml_goods` [ RunTime:0.0591s ]
+SQL: SHOW COLUMNS FROM `ml_goods` [ RunTime:0.0068s ]
+SQL: SELECT * FROM `ml_goods` WHERE `status` = 1  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `ml_goods` WHERE `status` = 2  [ RunTime:0.0002s ]
+SQL: SELECT * FROM `ml_goods` WHERE `status` = 3  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000085s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000144s ]
+NOTIC: [8] Undefined variable: vo D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 181 行.
+NOTIC: [8] Undefined variable: list D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 222 行.
+NOTIC: [8] Undefined variable: res D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 222 行.
+NOTIC: [8] Undefined variable: list D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 228 行.
+NOTIC: [8] Undefined variable: res D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 228 行.
+NOTIC: [8] Undefined variable: list D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 235 行.
+NOTIC: [8] Undefined variable: res D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 235 行.
+NOTIC: [8] Undefined variable: getintergel D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 241 行.
+NOTIC: [8] Undefined variable: active D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 382 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.173787s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.173842s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001567s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001621s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002088s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002154s ]
+
+[ 2018-08-31T09:28:45+08:00 ] 127.0.0.1 HTTP://www.ml.test/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000458s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000837s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000899s ]
+SQL: SHOW COLUMNS FROM `ml_goods` [ RunTime:0.0176s ]
+SQL: SHOW COLUMNS FROM `ml_goods` [ RunTime:0.0413s ]
+SQL: SELECT * FROM `ml_goods` WHERE `status` = 1  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `ml_goods` WHERE `status` = 2  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `ml_goods` WHERE `status` = 3  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000089s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000151s ]
+NOTIC: [8] Undefined variable: vo D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 181 行.
+NOTIC: [8] Undefined variable: list D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 222 行.
+NOTIC: [8] Undefined variable: res D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 222 行.
+NOTIC: [8] Undefined variable: list D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 228 行.
+NOTIC: [8] Undefined variable: res D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 228 行.
+NOTIC: [8] Undefined variable: list D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 235 行.
+NOTIC: [8] Undefined variable: res D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 235 行.
+NOTIC: [8] Undefined variable: getintergel D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 241 行.
+NOTIC: [8] Undefined variable: active D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 382 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.106534s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.106595s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000728s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000782s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001137s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001199s ]
+
+[ 2018-08-31T09:28:46+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000532s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000864s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000933s ]
+SQL: SHOW COLUMNS FROM `ml_goods` [ RunTime:0.0523s ]
+SQL: SHOW COLUMNS FROM `ml_goods` [ RunTime:0.0268s ]
+SQL: SELECT * FROM `ml_goods` WHERE `status` = 1  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `ml_goods` WHERE `status` = 2  [ RunTime:0.0001s ]
+SQL: SELECT * FROM `ml_goods` WHERE `status` = 3  [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000087s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000144s ]
+NOTIC: [8] Undefined variable: vo D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 181 行.
+NOTIC: [8] Undefined variable: list D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 222 行.
+NOTIC: [8] Undefined variable: res D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 222 行.
+NOTIC: [8] Undefined variable: list D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 228 行.
+NOTIC: [8] Undefined variable: res D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 228 行.
+NOTIC: [8] Undefined variable: list D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 235 行.
+NOTIC: [8] Undefined variable: res D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 235 行.
+NOTIC: [8] Undefined variable: getintergel D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 241 行.
+NOTIC: [8] Undefined variable: active D:\phpStudy\WWW\ml\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 382 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.060372s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.060426s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000535s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000577s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001042s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001099s ]
+

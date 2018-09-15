@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)http://www.erdangjiade.com/modals/19/1962/demo/center.html -->
+<html style="font-size: 44.444px;">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>会员中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/base.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/center.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loaders.min.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loading.css">
+    <script src="__PUBLIC__/Home/js/rem.js"></script>
+    <script src="__PUBLIC__/Home/js/jquery.min.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/Home/js/layer.js"></script>
+    <link href="__PUBLIC__/Home/css/layer.css" type="text/css" rel="styleSheet" id="layermcss">
+    <style type="text/css">
+        .errortips {
+            visibility: hidden;
+            color: red;
+        }
+
+        .colosethisbox {
+            position: absolute;
+            right: 0.2rem;
+            background: rgba(0, 0, 0, 0.39);
+            color: white;
+            border-radius: 50%;
+            padding: 0.16rem 0.3rem;
+            top: -0.01rem;
+        }
+
+        .grades {
+            width: 1.2rem !important;
+            margin-left: 0.36rem;
+        }
+
+        .duiintger {
+            width: 1.3rem;
+            margin-right: -0.83rem;
+            margin-bottom: -0.15rem;
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+
+
+        //sessionStorage.url = "confirm";
+        var sendmessg = 0, minsec = 60, sendmessageokorno = 0;
+        $(window).load(function () {
+
+            $(".loading").addClass("loader-chanage");
+            $(".loading").fadeOut(300);
+
+            var thisquareall = parseInt($('.color_45a1de').text().trim());
+
+            if (thisquareall > 0) {
+                $('.duiintger').show();
+            }
+
+            $('.myerweima').click(function (e) {
+                e.preventDefault();
+                $('.myerweimas').show();
+                $('.zdpingfeng').css('z-index', 100);
+                $('.zdpingfeng').show();
+                return false;
+            });
+            $('.colosethisbox').click(function () {
+                $(this).parent().hide();
+
+                $('.zdpingfeng').css('z-index', 9);
+                $('.zdpingfeng').hide();
+            });
+
+            $('.lookwewechat').click(function (e) {
+                e.preventDefault();
+                $('.gzerweimas').show();
+                $('.zdpingfeng').show();
+            })
+
+
+        })
+
+        
+
+
+
+    </script>
+
+</head>
+<!--loading页开始-->
+
+<body style="background-color: #f0f0f0">
+    <div class="loading">
+        <div class="loader">
+            <div class="loader-inner pacman">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <!--loading页结束-->
+
+    <!-- 公众号二维码 -->
+    <div class="gzerweimas" style="padding: 5%;position: fixed;z-index: 10;top: 16%;display: none;">
+        <a class="colosethisbox" style="">X</a>
+        <img src="https://int.stmingliu.cn/static/image/qrcode_for_gh_718799c89a25_860.jpg" style="width: 100%;">
+    </div>
+
+
+    </div>
+
+    <!--遮挡屏风-->
+    <div class="zdpingfeng" style="display: none; width: 100%;height: 100%; position: fixed; z-index: 9; background: rgba(0, 0, 0, 0.28);left: 0px;top: 0px;  "></div>
+
+
+    <!--header star-->
+    <header class="mui-bar mui-bar-nav" id="header">
+        <a class="btn" href="javascript:history.go(-1)">
+            <i class="iconfont icon-fanhui"></i>
+        </a>
+        <h4>会员中心</h4>
+    </header>
+    <!--header end-->
+
+    <!-- 会员头像 -->
+    <div class="vip-header">
+        <a>
+            <dl>
+                <dt>
+                    <img src="{$user.headimgurl}">
+                </dt>
+                <dd>
+                    <h4 style="margin-top: 0.056rem;">{$user.nickname}</h4>
+                    <p>
+                        <span>积分：
+                            <i class="depositnum">{$user.point}</i>
+                        </span>
+                    </p>
+                </dd>
+            </dl>
+        </a>
+    </div>
+    <!-- 会员俱乐部 -->
+    <div class="vip-club border_top_bottom">
+        <ul>
+            <li>
+                <a href="{:U('Home/Orders/ordersList/type/1')}">
+                    <i class="iconfont"></i>
+                    <p>待付款</p>
+                </a>
+            </li>
+            <li>
+                <a href="{:U('Home/Orders/ordersList')}">
+                    <i class="iconfont"></i>
+                    <p>全部订单</p>
+                </a>
+            </li>
+            <li>
+                <a href="{:U('Home/Orders/ordersList/type/2')}">
+                    <i class="iconfont"></i>
+                    <p>已完成</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="vip-club border_top_bottom vip-account">
+        <div class="vip-club-title border_bottom">
+            <span>
+                <i class="iconfont"></i>我的账户</span>
+            <a href="{:U('Home/User/editUser')}">设置
+                <i class="iconfont"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="vip-list-icon border_top_bottom" style="    padding-bottom: 1.59rem;">
+        <ul>
+            <li class="border_bottom">
+                <a href="{$looklistpay}" class="border_right">
+                    <i class="iconfont"></i>
+                    <em>评价晒单</em>
+                </a>
+                <a href="{$looklistpay}" style="text-align: right;padding-right: 0;padding-left: 1rem;">
+                    <i class="iconfont" style="transform: rotate(-90deg);font-size:20px; text-indent:7px;"></i>
+                </a>
+            </li>
+            <li>
+                <a href="http://mm.stmingliu.com/" class="border_right">
+                    <i class="iconfont">
+                        <img src="__PUBLIC__/Home/image/index.png" style="    width: 0.6rem;" />
+                    </i>
+                    <em>名流整形</em>
+                </a>
+                <a href="http://mm.stmingliu.com/" style="text-align: right;padding-right: 0;padding-left: 1rem;">
+                    <i class="iconfont" style="transform: rotate(-90deg);font-size:20px; text-indent:7px;"></i>
+                </a>
+            </li>
+
+            <li class="addlinew">
+                <div>
+                    <a href="http://www.stmingliu.com/">官方主页</a>
+                    <a class="lookwewechat">关注我们</a>
+                    <a href="http://j.map.baidu.com/7d3cC">线下门店</a>
+                    <a href="https://m.weibo.cn/p/1005052355101520">新浪微博</a>
+                </div>
+                <p>本商城由名流提供技术支持</p>
+            </li>
+        </ul>
+    </div>
+    <!--尾部-->
+    <include file="Public/footer" />
+
+
+
+
+</body>
+
+</html>

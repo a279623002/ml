@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="font-size: 44.444px;">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>确认支付</title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/base.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/zhifu.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mui.min.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loaders.min.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loading.css">
+	<script src="__PUBLIC__/Home/js/rem.js"></script>
+	<script src="__PUBLIC__/Home/js/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(window).load(function () {
+			$(".loading").addClass("loader-chanage")
+			$(".loading").fadeOut(300)
+		})
+		$(function () {
+			//计算内容上下padding
+			reContPadding({ main: "#main", header: "#header", footer: "#footer" });
+			function reContPadding(o) {
+				var main = o.main || "#main",
+					header = o.header || null,
+					footer = o.footer || null;
+				var cont_pt = $(header).outerHeight(true),
+					cont_pb = $(footer).outerHeight(true);
+				$(main).css({ paddingTop: cont_pt, paddingBottom: cont_pb });
+			}
+		});
+	</script>
+</head>
+<!--loading页开始-->
+
+<body>
+	<div class="loading">
+		<div class="loader">
+			<div class="loader-inner pacman">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<!--loading页结束-->
+
+	<header class="mui-bar mui-bar-nav report-header box-s" id="header">
+		<a class="btn" href="javascript:history.go(-1)">
+			<i class="iconfont icon-fanhui fl"></i>
+		</a>
+		<p>确认支付</p>
+	</header>
+	<div id="main" class="mui-clearfix contaniner sorder" style="padding-top: 57px;">
+		<div class="warning clearfloat box-s">
+			提示：请在24小时内完成在线支付，逾期将视为订单无效
+		</div>
+		<div class="odernum clearfloat">
+			<ul>
+				<li>您的订单号：{$detail.number}</li>
+				<li>应付金额：
+					<span>{$detail.price}</span>元</li>
+
+			</ul>
+		</div>
+
+		<form method="get" action="{:U('Api/Weixinpay/pay')}">
+			<input type="hidden" name="out_trade_no" value="{$orderid}" />
+
+			<button class="address-add fl">
+				确认支付
+			</button>
+		</form>
+		<!-- <form method="get" action="{:U('Home/Orders/wexinpay_js')}">
+			<input type="hidden" name="orderid" value="{$orderid}" />
+
+			<button class="address-add fl">
+				确认支付
+			</button>
+		</form> -->
+
+	</div>
+
+	<script>
+		function onBridgeReady() {
+			var data = { $data };
+			WeixinJSBridge.invoke(
+				'getBrandWCPayRequest', data,
+				function (res) {
+					if (res.err_msg == "get_brand_wcpay_request:ok") {
+						// 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+
+						var order_id = document.getElementById('order_id').value;
+						window.location.href = 'http://ml.stmingliu.com/index.php/Home/Orders/notify/order_id/' + order_id;
+					} else {
+						document.title = '取消支付';
+						history.go(-1);
+					}
+				}
+			);
+		}
+		if (typeof WeixinJSBridge == "undefined") {
+			if (document.addEventListener) {
+				document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+			} else if (document.attachEvent) {
+				document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+				document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+			}
+		} else {
+			onBridgeReady();
+		}
+	</script>
+	<include file="Public/footer" />
+</body>
+
+</html>

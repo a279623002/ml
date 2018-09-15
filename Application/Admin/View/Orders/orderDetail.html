@@ -1,0 +1,91 @@
+<include file="Public/header" />
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="contact-box">
+                <a href="#">
+                    <div class="col-sm-4">
+                        <div class="text-center">
+                            <img alt="image" class="img-circle m-t-xs img-responsive" src="{$user.headimgurl}">
+                            <div class="m-t-xs font-bold">{$user.nickname}</div>
+                        </div>
+                    </div>
+                </a>
+                <div class="col-sm-8">
+
+                    <h3>
+                        <strong>真实姓名:{$user.realname}</strong>
+                    </h3>
+                    <p>
+                        <i class="fa fa-map-marker"></i> {$user.country}·{$user.province}·{$user.city}</p>
+
+                    <address>
+                        <a href="#">
+                            <strong>单号：{$order.number}</strong>
+                            <br> 价格：{$order.price}
+                            <br> 数量：{$order.sum}
+                            <br> 备注：{$order.msg}
+                            <br> 购买时间：{$order.addtime}
+                        </a>
+                        <br>
+                        <abbr title="Phone">Tel:</abbr> {$user.mobile}
+                    </address>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <foreach name='goods' item='vo' key='k'>
+            <div class="col-sm-4">
+                <div class="contact-box">
+                    <a href="#">
+                        <div class="col-sm-4">
+                            <div class="text-center">
+                                <img alt="image" class="img-circle m-t-xs img-responsive" src="__PUBLIC__/../Uploads/Goods/{$vo['image']}">
+                                <div class="m-t-xs font-bold">{$vo.name}</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-8">
+                        <h3>
+                            <strong>商品ID: {$vo.goods_id}</strong>
+                        </h3>
+
+                        <address>
+                            <a href="#">
+                                <strong>单号：{$order.number}</strong>
+                                <br> 商品价格：{$vo.price}
+                                <br> 购买数量：{$vo.sum}
+                            </a>
+                        </address>
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </foreach>
+    </div>
+
+</div>
+<script src="https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="js/content.min.js?v=1.0.0"></script>
+<script>
+    $(document).ready(function () {
+        $(".contact-box").each(function () {
+            animationHover(this, "pulse")
+        })
+    });
+</script>
+
+
+
+
+<include file="Public/footer" />
+
+
+
+</body>
+
+</html>

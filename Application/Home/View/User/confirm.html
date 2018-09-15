@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="font-size: 38.333px;">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>确认订单</title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/base.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/confirm.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mui.min.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loaders.min.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loading.css">
+	<script src="__PUBLIC__/Home/js/rem.js"></script>
+	<script src="__PUBLIC__/Home/js/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		sessionStorage.url = "confirm";
+		$(window).load(function () {
+			$(".loading").addClass("loader-chanage")
+			$(".loading").fadeOut(300);
+
+
+
+		})
+	</script>
+</head>
+<!--loading页开始-->
+
+<body>
+	<div class="loading">
+		<div class="loader">
+			<div class="loader-inner pacman">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<!--loading页结束-->
+
+	<!--header star-->
+	<header class="mui-bar mui-bar-nav" id="header">
+		<a class="btn" href="javascript:history.go(-1)">
+			<i class="iconfont icon-fanhui"></i>
+		</a>
+		<div class="top-sch-box top-sch-boxtwo flex-col">
+			确认订单
+		</div>
+	</header>
+	<form method="post" action="#" id="myForm">
+		<input type="hidden" name="sum" value="{$allnumber}" />
+		<input type="hidden" name="price" value="{$money}" />
+		<!--header end-->
+		<div class="warp warptwo clearfloat">
+
+			<div class="confirm clearfloat">
+				<foreach name='list' item='vo' key='k'>
+					<div class="lie clearfloat">
+						<div class="tu clearfloat fl">
+							<img src="__PUBLIC__/../Uploads/Goods/{$vo.image}">
+						</div>
+						<div class="right clearfloat fl">
+							<p class="tit over">{$vo.name}</p>
+							<div class="xia clearfloat">
+								<span id="price" class="jifen fl over">
+									{$vo.price}
+									<span class="fr db">×{$vo.sum}</span>
+							</div>
+						</div>
+						<input type="hidden" name="shopcar_id[]" value="{$vo.shopcar_id}" />
+						<input type="hidden" name="goods_id[]" value="{$vo.goods_id}" />
+						<input type="hidden" name="goods_sum[]" value="{$vo.sum}" />
+					</div>
+				</foreach>
+
+				<!-- 
+				<div class="gmshu clearfloat box-s fl">
+					<div class="gcontent clearfloat">
+						<p class="fl">购买数量</p>
+						<div class="you clearfloat fr">
+							<ul>
+								<li id="down">
+									<img src="__PUBLIC__/Home/image/jian.jpg">
+								</li>
+								<li id="count">1</li>
+								<li id="upcount">
+									<img src="__PUBLIC__/Home/image/jia.jpg">
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div> -->
+
+
+				<div class="gmshu gmshuthree clearfloat box-s fl">
+					<div class="gcontent clearfloat">
+						<p class="fl">买家留言</p>
+						<div class="you clearfloat fl">
+							<input type="text" name="msg" id="" value="" class="text" placeholder="选填 对本次交易需求给商家留言">
+						</div>
+					</div>
+				</div>
+				<div class="gmshu clearfloat box-s fl">
+					<p class="fr">共
+						<span id="number">{$allnumber}</span>件商品 合计
+						<samp id="allmoneyceo">{$money}</samp>元
+					</p>
+				</div>
+
+			</div>
+		</div>
+
+		<!--settlement star-->
+		<div class="settlement clearfloat">
+			<div class="zuo clearfloat fl box-s">
+				<span id="allnumber">小计:</span>
+				<span id="allmoney">{$money}元</span>
+			</div>
+			<span class="buynowsubod fl db" id="order">提交订单 </span>
+
+		</div>
+	</form>
+	<!--settlement end-->
+
+	<!--footer star-->
+	<include file="Public/footer" />
+	<!--footer end-->
+	<script>
+		$(function () {
+			$('#order').click(function () {
+				$.ajax({
+					url: '{:U('Home/Orders/order')}',
+					type: 'post',
+					data: $('#myForm').serialize(),
+					dataType: 'json',
+					success: function (data) {
+						if (data.state) {
+							window.location.href = "{:U('Home/Orders/paying')}?order_id=" + data.order_id;
+						} else {
+							alert(data.msg);
+						}
+					}
+				})
+			})
+		})
+	</script>
+
+</body>
+
+</html>

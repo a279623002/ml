@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="font-size: 38.333px;">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>确认订单</title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/base.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/confirm.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mui.min.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loaders.min.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loading.css">
+	<script src="__PUBLIC__/Home/js/rem.js"></script>
+	<script src="__PUBLIC__/Home/js/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		sessionStorage.url = "confirm";
+		$(window).load(function () {
+			$(".loading").addClass("loader-chanage")
+			$(".loading").fadeOut(300);
+		})
+	</script>
+</head>
+<!--loading页开始-->
+
+<body>
+	<div class="loading">
+		<div class="loader">
+			<div class="loader-inner pacman">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<!--loading页结束-->
+
+	<!--header star-->
+	<header class="mui-bar mui-bar-nav" id="header">
+		<a class="btn" href="javascript:history.go(-1)">
+			<i class="iconfont icon-fanhui"></i>
+		</a>
+		<div class="top-sch-box top-sch-boxtwo flex-col">
+			确认订单
+		</div>
+	</header>
+	<form method="post" action="#" id="myForm">
+		<input type="hidden" name="goods_id[]" value="{$data.goods_id}" />
+		<input type="hidden" name="goods_sum[]" value="1" id="input_g" />
+		<input type="hidden" name="price" value="{$data.price}" id="input_p"/>
+		<input type="hidden" name="sum" value="1" id="input_s"/>
+		<!--header end-->
+		<div class="warp warptwo clearfloat">
+
+			<div class="confirm clearfloat">
+				<div class="lie clearfloat">
+					<div class="tu clearfloat fl">
+						<img src="__PUBLIC__/../Uploads/Goods/{$data.image}">
+					</div>
+					<div class="right clearfloat fl">
+						<p class="tit over">{$data.name}</p>
+						<div class="xia clearfloat">
+							<span id="price" class="jifen fl over">
+								{$data.price}
+							</span>
+							<span id="sum" class="fr db">×1</span>
+						</div>
+					</div>
+					
+				</div>
+
+				<div class="gmshu clearfloat box-s fl">
+					<div class="gcontent clearfloat">
+						<p class="fl">购买数量</p>
+						<div class="you clearfloat fr">
+							<ul>
+								<li id="down">
+									<img src="__PUBLIC__/Home/image/jian.jpg">
+								</li>
+								<li id="count">1</li>
+								<li id="upcount">
+									<img src="__PUBLIC__/Home/image/jia.jpg">
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="gmshu gmshuthree clearfloat box-s fl">
+					<div class="gcontent clearfloat">
+						<p class="fl">买家留言</p>
+						<div class="you clearfloat fl">
+							<input type="text" name="msg" id="" value="" class="text" placeholder="选填 对本次交易需求给商家留言">
+						</div>
+					</div>
+				</div>
+				<div class="gmshu clearfloat box-s fl">
+					<p class="fr">共
+						<span id="number">1</span>件商品 合计
+						<samp id="allmoneyceo">{$data.price}</samp>
+					</p>
+				</div>
+
+			</div>
+		</div>
+
+		<!--settlement star-->
+		<div class="settlement clearfloat">
+			<div class="zuo clearfloat fl box-s">
+				<span id="allnumber">小计:</span>
+				<span id="allmoney">{$data.price}</span>
+			</div>
+			<span class="buynowsubod fl db" id="order">提交订单 </span>
+
+		</div>
+	</form>
+	<!--settlement end-->
+
+	<!--footer star-->
+	<include file="Public/footer" />
+	<!--footer end-->
+
+
+	<script type="text/javascript">
+		var count = $('#count'); //购买数量
+		var price = parseFloat($('#price').text()); //商品价格
+		//减
+		$('#down').click(function () {
+			if (count.text() > 1) {
+				//改变购买数量
+				var down = parseInt(count.text()) - 1;
+				$('#count').text(down);
+				$('#sum').text('×' + down);
+				$('#number').text(down);
+
+				var a = 3.1415926;
+				a = a.toFixed(2);//保留2位但结果为一个String类型
+				a = parseFloat(a);//将结果转换会float
+				//用一步的话如下
+				a = parseFloat(a.toFixed(2));
+				//改变商品总价
+				var all = FloatMul(price, down);
+				$('#allmoneyceo').text(all);
+				$('#allmoney').text(all);
+				$('#input_s').val(down);
+				$('#input_g').val(down);
+				$('#input_p').val(all);
+			}
+		})
+		//加
+		$('#upcount').click(function () {
+			if (count.text() < 99) {
+				//改变购买数量
+				var add = parseInt(count.text()) + 1;
+				$('#count').text(add);
+				$('#sum').text('×' + add);
+				$('#number').text(add);
+				//改变商品总价
+				var all = FloatMul(price, add);
+				$('#allmoneyceo').text(all);
+				$('#allmoney').text(all);
+				$('#input_s').val(add);
+				$('#input_g').val(add);
+				$('#input_p').val(all);
+			}
+		})
+
+		//浮点数乘法运算
+		function FloatMul(arg1, arg2) {
+			var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+			try { m += s1.split(".")[1].length } catch (e) { }
+			try { m += s2.split(".")[1].length } catch (e) { }
+			return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
+		}
+
+
+	</script>
+	<script>
+		$(function () {
+			$('#order').click(function () {
+				$.ajax({
+					url: '{:U('Home/Orders/order')}',
+					type: 'post',
+					data: $('#myForm').serialize(),
+					dataType: 'json',
+					success: function (data) {
+						if (data.state) {
+							window.location.href = "{:U('Home/Orders/paying')}?order_id=" + data.order_id;
+						} else {
+							alert(data.msg);
+						}
+					}
+				})
+			})
+		})
+	</script>
+
+
+
+</body>
+
+</html>
