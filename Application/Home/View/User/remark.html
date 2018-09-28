@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>管理订单</title>
+    <title>评价晒单</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/address.css">
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/loaders.min.css">
@@ -70,49 +70,34 @@
         <a class="btn" href="javascript:history.go(-1)">
             <i class="iconfont icon-fanhui"></i>
         </a>
-        <p>管理订单</p>
+        <p>评价晒单</p>
     </header>
     <ul class="address-list">
         <foreach name='list' item='vo' key='k'>
             <li>
-                <p>下单时间：{$vo.addtime}</p>
+                <p>评论时间：{$vo.addtime}</p>
                 <hr>
-                <foreach name='vo.goods' item='v' key='key'>
-                    <div style="position: relative;">
-                        <a href="{:U('Home/Goods/goods/goods_id/'.$v['goods_id'])}">
-                            <img src="__PUBLIC__/../Uploads/Goods/{$v.image}">
-                            <div style="display: inline-block;width: 70%;">
-                                <p style="color: #6b6666;">{$v.name}</p>
-                                <p class="order-add1">{$v.sum}件</p>
-                                <p class="order-add1">单价 {$v.price}元 </p>
-                                <p class="order-add1 allpricescore">总价
-                                    <span style="color:red;">{$v['sum']*$v['price']}元</span>
-                                </p>
-                            </div>
-                        </a>
-                        <!-- <if condition="($vo.status eq 2)">
-                            <a href="javascript:remark({$v['goods_id']})" class="editButton surebuygo" style="position: absolute; z-index: 99; right: 7%; top: 30%;">
-                                评价
-                            </a>
-                        </if> -->
-                        <hr>
-                    </div>
-                </foreach>
+                <div style="position: relative;">
+                    <a href="{:U('Home/Goods/goods/goods_id/'.$vo['goods']['goods_id'])}">
+                        <!-- <img src="__PUBLIC__/../Uploads/Goods/{$vo.goods.image}" style="float: left;">
+                        <span>{$vo.goods.name}</span>
+                        <div style="display: inline-block;width: 70%; border-left: 1px solid #f7f7f7;">
+                            <p style="color: #6b6666;">{$vo.goods.name}</p>
+                        </div> -->
+                        <div style="float: left; width: 29%;">
+                            <h2 style="margin:0 1.7rem; color: black; font-weight: normal;">{$vo.goods.name}</h2>
+                            <img src="__PUBLIC__/../Uploads/Goods/{$vo.goods.image}" style="float: left;">
+                        </div>
+                        <div style="float: left; width: 70%; border-left: 1px solid #f7f7f7;">
+                            <p style="color: #6b6666; word-wrap: break-word;">{$vo.remark}</p>
+                        </div>
+                        <div style="clear: both;"></div>
+                    </a>
+                    <hr>
+                </div>
                 <div class="address-cz">
-                    <if condition="($vo.status eq 1)">
-                        <a href="{:U('Home/Orders/paying/order_id/'.$vo['order_id'])}" class="editButton surebuygo">
-                            去买单</a>
-
-                        <elseif condition="($vo.flag_remark eq 1)"/>
-                        <a href="javascript:remark({$vo.order_id})" class="editButton surebuygo">
-                            评&nbsp;&nbsp;价
-                        </a>
-                        <else />
-                        <a href="javascript:void;" class="editButton surebuygo">
-                            已完成
-                        </a>
-                    </if>
-                    <a href="javascript:del({$vo.order_id})" class="deleteButton">删除订单</a>
+                    <a href="{:U('Home/Goods/goods/goods_id/'.$vo['goods']['goods_id'])}" class="deleteButton">查看商品</a>
+                    <a href="javascript:del({$vo.remark_id})" class="editButton surebuygo">删&nbsp;&nbsp;&nbsp;&nbsp;除</a>
                 </div>
             </li>
         </foreach>
@@ -120,9 +105,9 @@
     <script>
         function del(ID) {
             $.ajax({
-                url: '{:U('Home/Orders/delOrder')}',
+                url: '{:U('Home/User/delRemark')}',
                 type: 'post',
-                data: { 'order_id': ID },
+                data: { 'remark_id': ID },
                 dataType: 'json',
                 success: function (data) {
                     if (data.state) {
@@ -134,25 +119,6 @@
             })
         }
 
-        function remark(ID) {
-            var remark = prompt('请输入评价：');
-            if(remark) {
-                $.ajax({
-                url: '{:U('Home/Orders/remark')}',
-                type: 'post',
-                data: { 'order_id': ID, 'remark': remark },
-                dataType: 'json',
-                success: function (data) {
-                    if (data.state) {
-                        alert(data.msg);
-                        window.location.href = '{:U('Home/User/remark')}';
-                    } else {
-                        alert(data.msg);
-                    }
-                }
-            })
-            }
-        }
     </script>
 
     <!--尾部-->

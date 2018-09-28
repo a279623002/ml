@@ -36,6 +36,7 @@ class GoodsController extends BaseController
 
 		$this->assign('data', $data['data']);
 		$this->assign('slider', $data['slider']);
+		$this->assign('remark', $data['remark']);
 		$this->display();
 	}
 
@@ -46,13 +47,6 @@ class GoodsController extends BaseController
 	 */
 	public function confirm()
 	{
-		$openid = session('openId');
-		$user = M('user')->where(array('openid' => $openid))->find();
-		if (empty($user['realname']) || empty($user['mobile'])) {
-			echo "<script>alert('请完善个人资料!');window.location.href='" . U('Home/User/editUser') . "'</script>";
-			die;
-		}
-
 		$GoodsLogic = new GoodsLogic();
 		$goods_id = I('post.goods_id', '', true);
 		$data = $GoodsLogic->get_goods_detail($goods_id);

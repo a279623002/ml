@@ -31,7 +31,7 @@ class GoodsController extends BaseController
 	{
 		try {
 			$GoodsLogic = new GoodsLogic();
-			$goods_id = I('get.goods_id');
+			$goods_id = I('get.goods_id', '', true);
 			if (!empty($goods_id)) {
 				$detail = $GoodsLogic->get_goods_detail($goods_id);
 				$this->assign('detail', $detail);
@@ -67,7 +67,7 @@ class GoodsController extends BaseController
 	 */
 	public function goodsDel()
 	{
-		$goods_id = I('post.goods_id');
+		$goods_id = I('post.goods_id', '', true);
 		$GoodsLogic = new GoodsLogic();
 		$result = $GoodsLogic->goodsDel($goods_id);
 		exit(json_encode($result));
@@ -80,7 +80,7 @@ class GoodsController extends BaseController
 	 */
 	public function goodsSlider()
 	{
-		$goods_id = I('get.goods_id');
+		$goods_id = I('get.goods_id', '', true);
 		$GoodsLogic = new GoodsLogic();
 		$list = $GoodsLogic->sliderList($goods_id);
 		$this->assign('list', $list);
@@ -95,7 +95,7 @@ class GoodsController extends BaseController
 	 */
 	public function addSlider()
 	{
-		$goods_id = I('post.goods_id');
+		$goods_id = I('post.goods_id', '', true);
 		$GoodsLogic = new GoodsLogic();
 		$image = empty($_FILES['image']) ? '' : $_FILES['image'];
 		if ($image['error'] == 0) {
@@ -116,9 +116,26 @@ class GoodsController extends BaseController
 	 */
 	public function delSlider()
 	{
-		$slider_id = I('post.slider_id');
+		$slider_id = I('post.slider_id', '', true);
 		$GoodsLogic = new GoodsLogic();
 		$result = $GoodsLogic->sliderDel($slider_id);
 		exit(json_encode($result));
+	}
+
+	/**
+	 * @author Zero
+	 * Date 2018-09-15
+	 * 商品评论
+	 */
+	public function goodsRemark()
+	{
+		$goods_id = I('get.goods_id', '', true);
+		$data = I('post.', '', true);
+		$GoodsLogic = new GoodsLogic();
+		$list = $GoodsLogic->remarkList($goods_id, $data);
+		$this->assign('goods_id', $goods_id);
+		$this->assign('page', $list['page']->show());
+		$this->assign('list', $list['list']);
+		$this->display();
 	}
 }

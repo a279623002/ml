@@ -14,9 +14,9 @@ class UserLogic extends RelationModel
 	public function get_user_list($data)
 	{
 		$Model = M('user');
-		$where['realname'] = array('like', '%'.$data['realname'].'%');
-		$where['mobile'] = array('like', '%'.$data['mobile'].'%');
-		$where['_logic'] = 'or';
+		if (!empty($data['realname'])) $where['realname'] = array('like', '%'.$data['realname'].'%');
+		if (!empty($data['mobile'])) $where['mobile'] = array('like', '%'.$data['mobile'].'%');
+		!empty($where['realname']) || !empty($where['mobile']) ? $where['_logic'] = 'or' : $where = array();
 		$order = $data['sort'] == 1 ? 'addtime desc' : 'updatetime desc';
 		$where = array_filter($where);
 		$count = $Model->where($where)->count();

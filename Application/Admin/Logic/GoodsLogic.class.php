@@ -160,11 +160,33 @@ class GoodsLogic extends RelationModel
 	 */
 	public function sliderList($goods_id)
 	{
-		$list = M('goods_slider')->where(array('data' => $data))->select();
+		$list = M('goods_slider')->where(array('goods_id' => $goods_id))->select();
 		foreach ($list as $key => $value) {
 			$list[$key]['addtime'] = date('Y-m-s H:i:s', $list[$key]['addtime']);
 			$list[$key]['name'] = M('goods')->where(array('goods_id' => $list[$key]['goods_id']))->getField('name');
 		}
 		return $list;
 	}
+
+	/**
+	 * @author Zero
+	 * Date 2018-09-15
+	 * 商品评论
+	 */
+	public function remarkList($goods_id, $data)
+	{
+		!empty($data['goods_id']) ? $where['goods_id'] = $data['goods_id'] : $where['goods_id'] = $goods_id;
+		if(!empty($data['key'])) $where['remark'] = array('like', '%'.$data['key'].'%');
+		$where = array_filter($where);
+		$Model = M('user_remark');
+		$count = $Model->where($where)->count();
+		$p = getpage($count, 15);
+		$list = $Model->where($where)->select();
+		foreach ($list as $key => $value) {
+			$list[$key]['addtime'] = date('Y-m-s H:i:s', $list[$key]['addtime']);
+			$list[$key]['name'] = M('goods')->where(array('goods_id' => $list[$key]['goods_id']))->getField('name');
+		}
+		return array('list' => $list, 'page' => $p);
+	}
+
 }

@@ -48,11 +48,11 @@
         </div>
         <div class="mui-input-row">
             <label style="color:skyblue;">姓名</label>
-            <input name="realname" type="text" class="mui-input-password" placeholder="{$user.realname}" style="line-height: 1.4rem;">
+            <input name="realname" type="text" class="mui-input-password" value="{$user.realname}" style="line-height: 1.4rem;">
         </div>
         <div class="mui-input-row">
             <label style="color:skyblue;">手机</label>
-            <input name="mobile" type="number" class="mui-input-password" placeholder="{$user.mobile}" style="line-height: 1.4rem;">
+            <input name="mobile" type="number" class="mui-input-password" value="{$user.mobile}" style="line-height: 1.4rem;">
         </div>
         <div class="mui-button-row">
             <button type="button" onclick="editUser();" class="mui-btn mui-btn-primary">修改</button>
@@ -72,6 +72,8 @@
                 success: function(data) {
                     alert(data.msg);
                     if (data.state) {
+                        window.location.href = "{:U('Home/User/index')}";
+                    }else {
                         window.location.reload();
                     }
                 }

@@ -18,7 +18,6 @@ class UserController extends BaseController
 		$UserLogic = new UserLogic();
 		$data = I('post.', '', true);
 		$userList = $UserLogic->get_user_list($data);
-
 		$this->assign('page', $userList['page']->show());
 		$this->assign('list', $userList['list']);
 		$this->display();

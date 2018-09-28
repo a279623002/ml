@@ -35,6 +35,19 @@ class OrdersController extends BaseController
 
 	/**
 	 * @author Zero
+	 * Date 2018-09-15
+	 * 订单评论
+	 */
+	public function remark()
+	{
+		$OrdersLogic = new OrdersLogic();
+		$data = I('post.', '', true);
+		$result = $OrdersLogic->remark($data);
+		exit(json_encode($result));
+	}
+
+	/**
+	 * @author Zero
 	 * Date 2018-08-30
 	 * 订单确认页
 	 */
@@ -90,16 +103,15 @@ class OrdersController extends BaseController
 	}
 
 	/**
+	 * @author Zero
+	 * Date 2018-09-20
 	 * 微信 公众号jssdk支付回调
 	 */
 	public function notify()
 	{
+		$OrdersLogic = new OrdersLogic();
 		$order_id = I('get.order_id', '', true);
-		if(M('orders')->where(array('order_id'=>$order_id))->save(array('status'=>2))) {
-			// echo "<script>window.location.href='".U('Home/Orders/ordersList')."'</sctipt>";
-			$url = U('Home/Orders/ordersList');
-			redirect($url);
-		}
+		$OrdersLogic->notify($order_id);
 	}
 
 

@@ -49,29 +49,6 @@
 				$('.prievimg').hide();
 			});
 
-			$('.productdetail').click(function (e) {
-				e.preventDefault();
-				x = document.getElementById("iconfont");
-				if ($('.syhsetcontent').is(':hidden')) {
-					rotateDIV(0);
-					$('.syhsetcontent').slideDown();
-				} else {
-					rotateDIV(90);
-					$('.syhsetcontent').slideUp();
-				}
-			});
-
-			$('.productevalus').click(function (e) {
-				e.preventDefault();
-				x = document.getElementById("evaiconfont");
-				if ($('.evalists').is(':hidden')) {
-					rotateDIV(0);
-					$('.evalists').slideDown();
-				} else {
-					rotateDIV(90);
-					$('.evalists').slideUp();
-				}
-			});
 
 
 		})
@@ -124,10 +101,15 @@
 		#LRdiv0 {
 			display: none !important;
 		}
-		
+
 		#detail_img img {
 			width: 100% !important;
 		}
+
+		#detail_img p {
+			line-height: 24px;
+		}
+
 	</style>
 </head>
 <!--loading页开始-->
@@ -268,35 +250,6 @@
 				</div>
 			</div>
 		</div>
-		<!--loading页结束-->
-		<!--	
-		<div style="
-		position: fixed;
-		top: 23%;
-		color: white;
-		left: 16%;
-	">
-	  <div style="
-		background: #ea2762;
-		padding: 8% 6%;
-		border-top-right-radius: 102%;
-	">本月签到</div>
-	
-		<div style="padding: 8% 6% ; ">	
-			<p style="
-			background: #e04776;
-		">
-			  <span>日</span>
-			  <span>一</span>
-			  <span>二</span>
-			  <span>三</span>
-			  <span>四</span>
-			  <span>五</span>
-			  <span>六</span>
-			 </p>
-		 </div>
-	  </div>-->
-
 
 
 		<!--header star-->
@@ -361,9 +314,6 @@
 				</div>
 				<!-- <div class="middle clearfloat box-s syhsetcontent" style="padding: 0px; border-top: #fff;"> -->
 				<div class="middle clearfloat box-s" style="padding: 0px; border-top: #fff;" id="detail_img">
-					<!-- <p>
-						<img src="__PUBLIC__/../Uploads/Goods/{$data.image}">
-					</p> -->
 					{$data.detail}
 				</div>
 				<div class="productevalus middle clearfloat box-s">
@@ -374,7 +324,17 @@
 				</div>
 
 				<ul class="evalists" style="padding: 10px;">
-
+					<foreach name='remark' item='vo' key='k'>
+						<li style="padding: 10px; width: 100%; margin-top: 0.1rem; background: #f7f7f7;">
+							<div>
+								<img class="avatar" src="{$vo.user.headimgurl}" style="border-radius: 50%;">
+								<span style="margin-left: 3%; color: darkgray;">{$vo.addtime}</span>
+							</div>
+							<div style="margin-top: 0.5rem; width: 100%; word-break: break-word; color: gray;">
+								{$vo.remark}
+							</div>
+						</li>
+					</foreach>
 				</ul>
 
 			</div>
@@ -431,29 +391,8 @@
 							<span id="allprice"></span>
 							<span id="allmoney">{$data.price}元</span>
 							<span id="allmmoneys"></span>
-							<!--积分
-								-->
 						</div>
 					</div>
-					<!--
-						<div class="middle clearfloat">
-							<p>颜色分类</p>
-							<div class="xia clearfloat">
-								<ul>
-									<li class="ra3 cur">蓝色</li>
-									<li class="ra3">白色</li>
-								</ul>
-							</div>
-						</div>
-						<div class="middle clearfloat">
-							<p>机身内存</p>
-							<div class="xia clearfloat">
-								<ul>
-									<li class="ra3 cur">120G</li>
-									<li class="ra3">60G</li>
-								</ul>
-							</div>
-						</div>-->
 					<div class="bottom clearfloat">
 						<p class="fl">购买数量</p>
 						<div class="you clearfloat fr">

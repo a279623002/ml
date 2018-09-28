@@ -46,6 +46,8 @@ class WeixinpayController extends Controller
         $assign = array(
             'data' => json_encode($data)
         );
+        $order_id = I('get.state');
+        $this->assign('order_id', $order_id);
         $this->assign($assign);
         $this->display();
     }

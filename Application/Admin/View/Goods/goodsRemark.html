@@ -46,65 +46,41 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h3>商品列表</h3>
-                    <form action="{:U('Admin/Goods/goodsList')}" method="post" class="form-horizontal m-t">
-                        <div class="form-group" style="width:200px;float:left;margin-right:0px;margin-left:0px;">
-                            <div class="col-sm-3" style="width:200px;float:left;">
-                                <input class="form-control" name="name" style="max-width: 178px;" placeholder="商品名称">
-                            </div>
-                        </div>
+                    <h3>商品评论</h3>
+                    <form action="{:U('Admin/Goods/goodsRemark')}" method="post" class="form-horizontal m-t">
+                        <input type="hidden" name="goods_id" value="{$goods_id}">
                         <div class="form-group" style="width:150px;float:left;margin-right:0px;margin-left:15px;">
-                            <select class="form-control m-b" name="status">
-                                <option value="">请选择分类</option>
-                                <option value="1">每月推荐</option>
-                                <option value="2">积分礼品</option>
-                                <option value="3">特价抢购</option>
-                            </select>
+                            <input class="form-control" type="text" name="key" placeholder="关键字" />
                         </div>
                         <button class="btn btn-primary" type="submit" style="margin-left:20px;">搜索</button>
-                        <div class="btn-group" style="float:right;">
-                            <button type="button" class="btn btn-success" onclick="location.href='{:U('Admin/Goods/goodsAdd')}'">添加商品+</button>
-                        </div>
                     </form>
                     <div class="ibox-content">
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>商品ID</th>
-                                        <th>商品类别</th>
-                                        <th>商品照</th>
-                                        <th>商品名称</th>
-                                        <th>商品价格</th>
-                                        <th>销售量</th>
-                                        <th>排序</th>
-                                        <th>创建时间</th>
+                                        <th>评论ID</th>
+                                        <th>所属商品</th>
+                                        <th>评论内容</th>
+                                        <th>添加时间</th>
                                         <th>操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <foreach name="list" item="item" key="key">
                                         <tr>
-                                            <td>{$item.goods_id}</td>
-                                            <td>{$item.statusInfo}</td>
-                                            <td>
-                                                <img src="/Uploads/Goods/{$item.image}" width="50px" height="50px">
-                                            </td>
+                                            <td>{$item.remark_id}</td>
                                             <td>{$item.name}</td>
-                                            <td>{$item.price}</td>
-                                            <td>{$item.sell}</td>
-                                            <td>{$item.sort}</td>
+                                            <td style="word-break: break-word;">{$item.remark}</td>
                                             <td>{$item.addtime}</td>
                                             <td>
-                                                <a href="{:U('Admin/Goods/goodsSlider/goods_id/'.$item['goods_id'])}"> 轮播图 </a>&nbsp;|
-                                                <a href="{:U('Admin/Goods/goodsRemark/goods_id/'.$item['goods_id'])}"> 查看评论 </a>&nbsp;|
-                                                <a href="{:U('Admin/Goods/goodsAdd/goods_id/'.$item['goods_id'])}"> 编辑 </a>&nbsp;|
-                                                <a href="javascript:del({$item.goods_id})"> 删除</a>
+                                                <a href="javascript:del({$item.remark_id})"> 删除</a>
                                             </td>
                                         </tr>
                                     </foreach>
                                 </tbody>
                             </table>
+                            
                         </div>
                         <div class="pages">{$page}</div>
                     </div>
@@ -115,13 +91,14 @@
 </div>
 <include file="Public/footer" />
 <script type="text/javascript">
+
     function del(ID) {
         if (confirm('确定删除吗？') == true) {
             $.ajax({
-                url: '{:U('Admin/Goods/goodsDel')}',
+                url: '{:U('Admin/Goods/delSlider')}',
                 type: 'post',
                 dataType: 'json',
-                data: { 'goods_id': ID },
+                data: { 'slider_id': ID },
                 success: function (data) {
                     if (data.state == true) {
                         alert('删除成功！');

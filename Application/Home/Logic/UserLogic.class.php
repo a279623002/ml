@@ -11,8 +11,9 @@ class UserLogic extends RelationModel
 	 * Date 2018-08-16
 	 * 获取用户信息
 	 */
-	public function get_user_detail($openid)
+	public function get_user_detail()
 	{
+		$openid = session('openId');
 		$Model = M('user');
 		$data = $Model->where(array('openid' => $openid))->find();
 		$data['updatetime'] = date('Y-m-d H:i:s', $data['updatetime']);
@@ -24,13 +25,14 @@ class UserLogic extends RelationModel
 	 * Date 2018-08-20
 	 * 用户信息修改
 	 */
-	public function user_edit($openid, $data)
+	public function user_edit($data)
 	{
+		$openid = session('openId');
 		$Model = M('user');
 		if (empty($data['realname'])) return array('state' => false, 'msg' => '请填写用户名!');
 		if (empty($data['mobile'])) return array('state' => false, 'msg' => '请填写手机号!');
 		$point = $Model->where(array('openid' => $openid))->getField('point');
-		$data['point'] = $point + 200;
+		if($point <= 0) $data['point'] = $point + 200;
 		if ($Model->where(array('openid' => $openid))->save($data)) {
 			$result = array('state' => true, 'msg' => '修改成功!');
 		} else {
@@ -79,10 +81,10 @@ class UserLogic extends RelationModel
 	 * Date 2018-08-24
 	 * 购物车列表
 	 */
-	public function get_shopCar($openid)
+	public function get_shopCar()
 	{
+		$openid = session('openId');
 		$user_id = M('user')->where(array('openid' => $openid))->getField('user_id');
-
 		$list = M('user_shopcar')->where(array('user_id' => $user_id))->order('id desc')->select();
 		foreach ($list as $key => $value) {
 			$list[$key]['goods'] = M('goods')->where(array('goods_id' => $list[$key]['goods_id']))->find();
@@ -98,6 +100,12 @@ class UserLogic extends RelationModel
 	 */
 	public function confirm($data)
 	{
+		$openid = session('openId');
+		$user = M('user')->where(array('openid' => $openid))->find();
+		if (empty($user['realname']) || empty($user['mobile'])) {
+			echo "<script>alert('请完善个人资料!');window.location.href='" . U('Home/User/editUser') . "'</script>";
+			die;
+		}
 		foreach ($data['shopids'] as $key => $value) {
 			$arr[$key] = explode(',', $value);
 		}
@@ -137,9 +145,42 @@ class UserLogic extends RelationModel
 		return array('list' => $list, 'allnumber' => $allnumber, 'money' => $money);
 	}
 
+	/**
+	 * @author Zero
+	 * Date 2018-09-15
+	 * 获取用户评论列表
+	 */
+	public function get_remark_list()
+	{
+		$openid = session('openId');
+		$user_id = M('user')->where(array('openid' => $openid))->getField('user_id');
+		$list = M('user_remark')->where(array('user_id' => $user_id))->select();
+		foreach ($list as $key => $value) {
+			//评价时间
+			$list[$key]['addtime'] = date('Y-m-d H:i:s', $list[$key]['addtime']);
+			//评论商品
+			$list[$key]['goods'] = M('goods')->where(array('goods_id'=>$list[$key]['goods_id']))->find();
+		}
+		return $list;
+	}
 
-
-
+	
+	/**
+	 * @author Zero
+	 * Date 2018-09-15
+	 * 删除评论
+	 */
+	public function del_remark($remark_id)
+	{
+		$Model = M('user_remark');
+		if (empty($remark_id)) return array('state' => false, 'msg' => '请选择评论!');
+		if ($Model->where(array('remark_id' => $remark_id))->delete()) {
+			$result = array('state' => true, 'msg' => '删除成功!');
+		} else {
+			$result = array('state' => false, 'msg' => '删除失败');
+		}
+		return $result;
+	}
 
 }
 ?>

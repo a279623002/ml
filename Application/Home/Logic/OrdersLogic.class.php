@@ -13,19 +13,22 @@ class OrdersLogic extends RelationModel
 	public function get_order_list($type)
 	{
 		$Model = M('orders');
+		$openid = session('openId');
+		$where['user_id'] = M('user')->where(array('openid' => $openid))->getField('user_id');
 		switch ($type) {
 			case 1:
-				$list = $Model->where(array('status' => 1))->order('addtime desc')->select();
+				$where['status'] = 1;
 				break;
 
 			case 2:
-				$list = $Model->where(array('status' => 2))->order('addtime desc')->select();
+				$where['status'] = 2;
 				break;
 
 			default:
-				$list = $Model->order('addtime desc')->select();
+				// $where['status'] = array();
 				break;
 		}
+		$list = $Model->where($where)->order('addtime desc')->select();
 		foreach ($list as $key => $value) {
 			$list[$key]['addtime'] = date('Y-m-d H:i:s', $list[$key]['addtime']);
 			$arr = array_filter(explode(',', $list[$key]['goods_id']));
@@ -50,6 +53,37 @@ class OrdersLogic extends RelationModel
 			$result = array('state' => true, 'msg' => '删除成功!');
 		} else {
 			$result = array('state' => false, 'msg' => '删除失败!');
+		}
+		return $result;
+	}
+
+	/**
+	 * @author Zero
+	 * Date 2018-09-15
+	 * 订单评论
+	 */
+	public function remark($data)
+	{
+		if (empty($data['order_id'])) return array('state' => false, 'msg' => '未指定订单!');
+		if (empty($data['remark'])) return array('state' => false, 'msg' => '请输入评价!');
+
+		$openid = session('openId');
+		$user_id = M('user')->where(array('openid' => $openid))->getField('user_id');
+		$where = array(
+			'addtime' => time(),
+			'user_id' => $user_id,
+			'remark' => $data['remark']
+		);
+		$goods_id_arr = M('orders')->where(array('order_id' => $data['order_id']))->getField('goods_id');
+		$arr = array_filter(explode(',', $goods_id_arr));
+		foreach ($arr as $k => $v) {
+			$where['goods_id'] = $v;
+			if (!(M('user_remark')->add($where))) return array('state' => false, 'msg' => '评价失败!');
+		}
+		if (M('orders')->where(array('order_id' => $data['order_id']))->save(array('flag_remark' => 2))) {
+			$result = array('state' => true, 'msg' => '评价成功!');
+		} else {
+			$result = array('state' => false, 'msg' => '评价失败!');
 		}
 		return $result;
 	}
@@ -101,7 +135,6 @@ class OrdersLogic extends RelationModel
 
 	}
 
-
 	/**
 	 * @author Zero
 	 * Date 2018-08-30
@@ -113,6 +146,23 @@ class OrdersLogic extends RelationModel
 		$data = M('orders')->where(array('order_id' => $order_id))->find();
 
 		return $data;
+	}
+
+	/**
+	 * @author Zero
+	 * Date 2018-09-20
+	 * 微信 公众号jssdk支付回调
+	 */
+	public function notify($order_id)
+	{
+		if (M('orders')->where(array('order_id' => $order_id))->save(array('status' => 2))) {
+			$user_id = M('orders')->where(array('order_id' => $order_id))->getField('user_id');
+			$point = M('user')->where(array('user_id' => $user_id))->getField('point');
+			$point += 10086;
+			M('user')->where(array('user_id' => $user_id))->save(array('point' => $point));
+		}
+		$url = U('Home/Orders/ordersList');
+		redirect($url);
 	}
 
 

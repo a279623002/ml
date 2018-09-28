@@ -14,9 +14,8 @@ class UserController extends BaseController
 	 */
 	public function index()
 	{
-		$openid = session('openId');
 		$UserLogic = new UserLogic();
-		$user = $UserLogic->get_user_detail($openid);
+		$user = $UserLogic->get_user_detail();
 		$this->assign('user', $user);
 		$this->display();
 	}
@@ -28,14 +27,13 @@ class UserController extends BaseController
 	 */
 	public function editUser()
 	{
-		$openid = session('openId');
 		$UserLogic = new UserLogic();
 		$data = I('post.', '', true);
 		if (!empty($data)) {
-			$result = $UserLogic->user_edit($openid, $data);
+			$result = $UserLogic->user_edit($data);
 			exit(json_encode($result));
 		}
-		$user = $UserLogic->get_user_detail($openid);
+		$user = $UserLogic->get_user_detail();
 		$this->assign('user', $user);
 		$this->display();
 	}
@@ -47,9 +45,8 @@ class UserController extends BaseController
 	 */
 	public function shopCar()
 	{
-		$openid = session('openId');
 		$UserLogic = new UserLogic();
-		$list = $UserLogic->get_shopCar($openid);
+		$list = $UserLogic->get_shopCar();
 		$this->assign('list', $list);
 		$this->display();
 	}
@@ -62,10 +59,8 @@ class UserController extends BaseController
 	 */
 	public function shopAdd()
 	{
-
-		$openid = session('openId');
 		$UserLogic = new UserLogic();
-		$user = $UserLogic->get_user_detail($openid);
+		$user = $UserLogic->get_user_detail();
 		$data = I('post.', '', true);
 		$data['user_id'] = $user['user_id'];
 		$result = $UserLogic->add_shop($data);
@@ -93,12 +88,6 @@ class UserController extends BaseController
 	 */
 	public function confirm()
 	{
-		$openid = session('openId');
-		$user = M('user')->where(array('openid' => $openid))->find();
-		if (empty($user['realname']) || empty($user['mobile'])) {
-			echo "<script>alert('请完善个人资料!');window.location.href='" . U('Home/User/editUser') . "'</script>";
-			die;
-		}
 		$UserLogic = new UserLogic();
 		$data = I('post.', '', true);
 		// (
@@ -115,7 +104,30 @@ class UserController extends BaseController
 		$this->display();
 	}
 
+	/**
+	 * @author Zero
+	 * Date 2018-09/15
+	 * 用户评价
+	 */
+	public function remark()
+	{
+		$UserLogic = new UserLogic();
+		$list = $UserLogic->get_remark_list();
+		$this->assign('list', $list);
+		$this->display();
+	}
 
-
+	/**
+	 * @author Zero
+	 * Date 2018-09-15
+	 * 删除评论
+	 */
+	public function delRemark()
+	{
+		$UserLogic = new UserLogic();
+		$remark_id = I('post.remark_id', '', true);
+		$result = $UserLogic->del_remark($remark_id);
+		exit(json_encode($result));
+	}
 
 }
